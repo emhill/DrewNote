@@ -9,9 +9,13 @@ public class Note {
 	//private Date modified = new Date();
 	private HashSet<String> tags = new HashSet<String>();
 	
+	private long id;
+	private static long id_counter = 1;
+	
 	public Note(String t, String txt) {
 		title = t;
 		text = txt;
+		id = id_counter++;
 	}
 	
 	public void tag(String t) {
@@ -19,11 +23,12 @@ public class Note {
 	}
 	
 	public String toString() {
-		return title + "\n" +
+		return  title + "\n" +
 				"----------------------\n" + 
-				text + "\n" +
+				text + "\n---\n" +
 				"Created on " + created + "\n" +
-				"Tags: " + tags;
+				"Tags: " + tags + "\n" +
+				"id: " + id + "\n";
 	}
 	
 	public static void main(String[] args) {
@@ -34,5 +39,8 @@ public class Note {
 		n.tag("CSCI 230");
 		n.tag("final project");
 		System.out.println(n);
+		
+		Note n2 = new Note("Testing", "The id counter");
+		System.out.println(n2);
 	}
 }
