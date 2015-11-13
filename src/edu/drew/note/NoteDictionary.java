@@ -1,21 +1,19 @@
 package edu.drew.note;
 
-import java.util.HashMap;
-
 public class NoteDictionary {
 
 	private Node head;
 	private int numEntries = 0;
 	
 	// Adds item to NodeDict
-	public boolean add(String title, String text) {
-		head = new Node(title, text, head);
+	public boolean add(Note note) {
+		head = new Node(note.getID(), note, head);
 		numEntries++; // Update number of notes
 		return true; // Node added
 	}
 	
 	// Inserts note at specific location
-	public boolean insertAt(String title, String text, int spot) {
+	public boolean insertAt(Note note, int spot) {
 		if(spot>numEntries) return false;
 		else {
 			int count = 0;
@@ -26,25 +24,25 @@ public class NoteDictionary {
 				n = n.next;
 				count++;
 			}
-			prev.next = new Node(title,text,n);
+			prev.next = new Node(note.getID(),note,n);
 			numEntries++;
 			return true;
 		}
 	}
 	
-	// Removes item from NodeDict
-	public String remove() {
-		String removed = head.title+" : "+head.text;
+	// Returns ID of note removed
+	public long remove() {
+		long removed = head.note.getID();
 		head = head.next;
 		return removed;
 	}
 	
-	// Removes specific item from NoteDict of 'title'
-	public boolean remove(String title) {
+	// Removes specific item from NoteDict of 'id'
+	public boolean remove(long ID) {
 		Node n = head;
 		Node prev = head;
 		while(n!=null) {
-			if(n.title.equals(title)){
+			if(n.note.getID() == ID){
 				prev.next = n.next;
 				return true;
 			}
@@ -54,12 +52,12 @@ public class NoteDictionary {
 		return false;
 	}
 	
-	// Replaces note at 'title' with another note Node
-	public boolean replace(String title,Node note) {
+	// Replaces note at 'id' with another note Node
+	public boolean replace(long ID,Node note) {
 		Node n = head;
 		Node next = head.next;
 		while(n!=null) {
-			if(n.title.equals(title)){
+			if(n.note.getID() == ID){
 				n = note;
 				n.next = next;
 				return true;
@@ -85,57 +83,34 @@ public class NoteDictionary {
 		return numEntries==0;
 	}
 	
-	// Returns a dictionary equivalent of the NodeDictionary
-	// I dont think this is necessary... not sure though.
-	public HashMap<String,String> toDict() {
-		HashMap<String,String> dict = new HashMap<String,String>();
-		Node n = head;
-		while(n!=null){
-			dict.put(n.title,n.text);
-			n=n.next;
-		}
-		return dict;
-	}
-	
 	// Converts NodeDictionary to a string to be printed to the console
 	public String toString(){
 		String dict="{";
 		Node n = head;
 		while(n.next!=null){
-			dict += "'"+n.title+"' : '"+n.text+"', ";
+			dict += "'"+n.id+"' : '"+n.note.getTitle()+"', ";
 			n=n.next;
 		}
-		dict += "'"+n.title+"' : '"+n.text+"'";
+		dict += "'"+numEntries+"' : '"+n.note.getTitle()+"'";
 		dict+="}";
 		return dict;
 	}
 	
-	// Node class imported from other projects; modified to stores note Titles and Text
+	// Node class imported from other projects; modified to stores note ids and Text
 	private class Node {
-	  private String title; // Note's title
-	  private String text; // Note's text
+	  private int id; // Note's id
+	  private Note note; // Note's text
 	  private Node next; // Pointer to next note in the dictionary
 
-		private Node(String Title, String Text) {
-			this(Title, Text, null);	
+		private Node(long id, Note note) {
+			this(id, note, null);	
 		} 
 		
-		private Node(String Title, String Text, Node nextNode) {
-			title = Title; // Title of note
-			text = Text; // Text of the note 
+		private Node(long id, Note note, Node nextNode) {
+			id = id; // Unique ID of note
+			note = note; // Note stored here
 			next = nextNode; // Pointer to next note
 		} 
 	} 
-	
-	public static void main(String[] args) {
-		// Testing main functionality
-		NoteDictionary q = new NoteDictionary();
-		q.add("Hello World!", "This is my first note");
-		q.add("Hello again World!", "Let's make another note");
-		q.add("Third Note", "This is my third");
-		System.out.println(q.toDict());
-		//q.remove("Hello World!");
-		System.out.println(q.toString());
-	}
 
 }
