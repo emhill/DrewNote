@@ -10,4 +10,6 @@ public interface SortInterface {
 	
 	public HashMap<T,Note> sort(HashMap<T,Note>);
 	
+	
+	
 }
