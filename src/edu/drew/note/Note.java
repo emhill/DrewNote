@@ -22,6 +22,18 @@ public class Note {
 		tags.add(t);
 	}
 	
+	public String getTitle() {
+		return title;
+	}
+	
+	public String getText() {
+		return text;
+	}
+	
+	public long getID() {
+		return id;
+	}
+	
 	public String toString() {
 		return  title + "\n" +
 				"----------------------\n" + 
