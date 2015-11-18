@@ -2,7 +2,7 @@ package edu.drew.note;
 
 public class NoteDictionary implements NoteCollection{
 
-	private Node head;
+	private Node head = null;
 	private int numEntries = 0;
 	
 	// Adds item to NodeDict
@@ -110,7 +110,7 @@ public class NoteDictionary implements NoteCollection{
 	// Node class imported from other projects; modified to stores note ids and Text
 	private class Node {
 	  private int id; // Note's id
-	  private Note note; // Note's text
+	  private Note note; // Note Obj
 	  private Node next; // Pointer to next note in the dictionary
 
 		private Node(long id, Note note) {
