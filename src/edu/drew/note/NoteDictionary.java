@@ -129,4 +129,28 @@ public class NoteDictionary implements NoteCollection{
 		return null;
 	}
 
+	@Override
+	public Note lookup(long ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean remove(Note note) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean contains(long ID) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Note[] toArray() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

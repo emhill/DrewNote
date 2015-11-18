@@ -5,11 +5,14 @@ public interface NoteCollection<T> {
 	//Adds new entry to the collection.
 	public boolean add(Note newNote);
 	
-	// Removes a Note and returns it
-	public long remove();
+	// Returns a specific note by its id
+	public Note lookup(long ID);
 	
-	// Removes a specific note
+	// Removes a specific note by its id
 	public boolean remove(long ID);
+	
+	// Removes a note by its object
+	public boolean remove(Note note);
 	
 	//Checks to see whether the collection is empty.
 	//returns true if it is, and false if otherwise.
@@ -20,7 +23,8 @@ public interface NoteCollection<T> {
 	
 	//sees whether anEntry is in the collection.
 	public boolean contains(Note note);
+	public boolean contains(long ID);
 
-	// Returns an array of ...? 
-	public Note[] toArray(Note[] array);
+	// Returns an array of Notes
+	public Note[] toArray();
 }
