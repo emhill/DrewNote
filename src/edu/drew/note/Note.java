@@ -2,6 +2,7 @@ package edu.drew.note;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Set;
 
 public class Note {
 	private String title, text;
@@ -20,6 +21,22 @@ public class Note {
 	
 	public void tag(String t) {
 		tags.add(t);
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+	
+	public String getText() {
+		return text;
+	}
+	
+	public long getID() {
+		return id;
+	}
+	
+	public Set<String> getTags() {
+		return tags;
 	}
 	
 	public String toString() {
