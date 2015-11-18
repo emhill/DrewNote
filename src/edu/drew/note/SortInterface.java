@@ -9,7 +9,4 @@ public interface SortInterface {
 	public LinkedList<Note> sort(LinkedList<Note> l);
 	
 	public HashMap<T,Note> sort(HashMap<T,Note>);
-	
-	
-	
 }
