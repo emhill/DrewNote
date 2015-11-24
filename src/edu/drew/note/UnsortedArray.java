@@ -2,6 +2,7 @@ package edu.drew.note;
 
 public class UnsortedArray<T> implements NoteCollection<T> {
 private Note [] s;
+private int numEntries;
 private int head;
 public UnsortedArray(){
 	 s = null;
@@ -55,8 +56,11 @@ public boolean contains(long ID) {
 @Override
 public Note[] toArray() {
 	// TODO Auto-generated method stub
+	Note[] result = (Note[]) new Object[numEntries];
+	for(int i =0; i < numEntries; i++)
+		result[i] = s[i];
+	return result;
 	
-	return null;
 }
 	
 }
