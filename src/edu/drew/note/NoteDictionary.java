@@ -2,10 +2,10 @@ package edu.drew.note;
 
 public class NoteDictionary implements NoteCollection{
 
-	private Node head;
+	private Node head = null;
 	private int numEntries = 0;
 	
-	// Adds item to NodeDict
+	// Adds item to data structure
 	public boolean add(Note note) {
 		head = new Node(note.getID(), note, head);
 		numEntries++; // Update number of notes
@@ -36,8 +36,20 @@ public class NoteDictionary implements NoteCollection{
 		head = head.next;
 		return removed;
 	}
+
+	// Removes Note object 'note' from the data structure
+	public boolean remove(Note note) {
+		Node n = head;
+		while(n!=null) {
+			if(n.note.equals(note)) {
+				return true;
+			}
+			n=n.next;
+		}
+		return false;
+	}
 	
-	// Removes specific item from NoteDict of 'id'
+	// Removes specific item from data structure with 'id'
 	public boolean remove(long ID) {
 		Node n = head;
 		Node prev = head;
@@ -52,13 +64,37 @@ public class NoteDictionary implements NoteCollection{
 		return false;
 	}
 	
-	public boolean contains(Note anEntry) {
+	// Searches the data structure for a note with 'ID'
+	public Note lookup(long ID) {
+		Node n = head;
+		while(n!=null){
+			if(n.note.getID() ==ID) {
+				return n.note;
+			}
+			n=n.next;
+		}
+		return null;
+	}
+	
+	// Checks if the data structure contains 'note'
+	public boolean contains(Note note) {
 		Node n  = head;
 		while(n!=null) {
-			if(n.note.equals(anEntry)) {
+			if(n.note.equals(note)) {
 				return true;
 			}
 			n=n.next;
+		}
+		return false;
+	}
+	
+	// Checks if the data structure contains a note with 'ID'
+	public boolean contains(long ID) {
+		Node n = head;
+		while(n!=null) {
+			if(n.note.getID() == ID) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -79,22 +115,34 @@ public class NoteDictionary implements NoteCollection{
 		return false;
 	}
 	
-	// Clears out the NodeDict
+	// Clears out the data structure
 	public void clear() {
 		head = null;
 		numEntries = 0;
 	}
 
-	// Returns size of NodeDict
+	// Returns size of data structure
 	public int getSize() {
 		return numEntries;
 	}
 	
+	// Determines whether or not data structure is empty
 	public boolean isEmpty() {
 		return numEntries==0;
 	}
 	
-	// Converts NodeDictionary to a string to be printed to the console
+	// Converts data structure to an array
+	public Note[] toArray() {
+		Note[] notes = new Note[getSize()];
+		Node n = head;
+		for(int i=0;i<getSize(); i++) {
+			notes[i] = head.note;
+			n=n.next;
+		}
+		return notes;
+	}
+	
+	// Converts data structure to a string to be printed to the console
 	public String toString(){
 		String dict="{";
 		Node n = head;
@@ -110,7 +158,7 @@ public class NoteDictionary implements NoteCollection{
 	// Node class imported from other projects; modified to stores note ids and Text
 	private class Node {
 	  private int id; // Note's id
-	  private Note note; // Note's text
+	  private Note note; // Note Obj
 	  private Node next; // Pointer to next note in the dictionary
 
 		private Node(long id, Note note) {
@@ -122,35 +170,6 @@ public class NoteDictionary implements NoteCollection{
 			note = note; // Note stored here
 			next = nextNode; // Pointer to next note
 		} 
-	}
-
-	public Note[] toArray(Note[] array) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Note lookup(long ID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean remove(Note note) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean contains(long ID) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Note[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
