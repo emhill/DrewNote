@@ -1,11 +1,6 @@
 package edu.drew.note;
 
-public class DictionaryUnsortedList<T> extends Note{
-
-	public DictionaryUnsortedList(String t, String txt) {
-		super(t, txt);
-		// TODO Auto-generated constructor stub
-	}
+public class DictionaryUnsortedList<T> implements NoteCollection<T>{
 
 private Node firstNode;
 private int numEntries;
@@ -25,14 +20,16 @@ private class Node{
 		next=nextNode;
 	}
 }
-	
-	public void add(long key, Note value){
-		firstNode=new Node(key,value,firstNode);
+
+	@Override
+	public boolean add(Note newNote){
+		firstNode=new Node(Note.getID(),newNote,firstNode);
 		numEntries++;
+		return true;
 	}
 	
-	public T[] toArray(){
-		T[] array= (T[]) new Object[numEntries];
+	public Note[] toArray(){
+		Note[] array= (Note[]) new Object[numEntries];
 		Node n=firstNode;
 		int i=0;
 		while(n!=null){
@@ -61,22 +58,31 @@ private class Node{
 		return false;
 	}
 	
-	public int getCurrentSize(){
-		return numEntries;
-	}
-	
-	public T remove(){
-		T result=firstNode.Note;
-		firstNode=firstNode.next;
-		numEntries--;
-		return result;
-	}
-	
-	public boolean T remove(long key){
+	@Override
+	public boolean remove(long ID) {
 		Node n=firstNode;
 		Node prev=null;
 		while (n!=null){
-			if (n.id==key){
+			if (n.id==ID){
+				if (prev==null){
+					firstNode=n.next;
+				}
+				else
+					prev.next=n.next;
+					numEntries--;
+			}
+			prev=n;
+			n=n.next;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean remove(Note note) {
+		Node n=firstNode;
+		Node prev=null;
+		while (n!=null){
+			if (n.Note.equals(note)){
 				if (prev==null){
 					firstNode=n.next;
 				}
@@ -92,13 +98,42 @@ private class Node{
 	
 	public void clear(){
 		while(!isEmpty()){
-			remove();
+			firstNode=firstNode.next;
+			numEntries--;
 		}
+	}
+	
+	@Override
+	public Note lookup(long ID) {
+		Node n=firstNode;
+		while(n!=null){
+			if(n.id==ID){
+				return n.Note;
+			}
+			n=n.next;
+		}
+		return null;
+	}
+
+	@Override
+	public int getSize() {
+		return numEntries;
+	}
+
+	@Override
+	public boolean contains(Note note) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean contains(long ID) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 	}
-
 }
