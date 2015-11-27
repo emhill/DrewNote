@@ -14,7 +14,7 @@ public class SortedLinkedList implements NoteCollection {
 	public boolean add(Note newNote) {
 		// TODO Auto-generated method stub
 		Node newNode = new Node(newNote, head);
-		return false;
+		return true;
 	}
 
 	@Override
@@ -38,13 +38,13 @@ public class SortedLinkedList implements NoteCollection {
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
-		return head == null;
+		return numEntries == 0;
 	}
 
 	@Override
 	public int getSize() {
 		// TODO Auto-generated method stub
-		return 0;
+		return numEntries;
 	}
 
 	@Override
