@@ -14,6 +14,7 @@ public class SortedLinkedList implements NoteCollection {
 	public boolean add(Note newNote) {
 		// TODO Auto-generated method stub
 		Node newNode = new Node(newNote, head);
+		numEntries ++;
 		return true;
 	}
 

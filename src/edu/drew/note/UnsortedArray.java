@@ -5,15 +5,18 @@ private Note [] s;
 private int numEntries;
 private int head;
 public UnsortedArray(){
-	 s = null;
+	 s = (Note[])new Object[numEntries];
+	 numEntries = 0;
 	 head = 0;
+	 
 	
 }
 @Override
 public boolean add(Note newNote) {
 	if(isEmpty()){
 	s [head] = newNote;
-	head ++;
+	numEntries ++;
+	
 	return true;
 }
 	return false;
@@ -41,7 +44,7 @@ public boolean isEmpty() {
 @Override
 public int getSize() {
 	// TODO Auto-generated method stub
-	return 0;
+	return numEntries;
 }
 @Override
 public boolean contains(Note note) {
