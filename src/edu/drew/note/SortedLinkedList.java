@@ -1,8 +1,5 @@
 package edu.drew.note;
 
-
-
-
 public class SortedLinkedList implements NoteCollection {
 	private Node head;
 	private int numEntries;
@@ -10,6 +7,7 @@ public class SortedLinkedList implements NoteCollection {
 		head = null;
 		numEntries = 0;
 	}
+	
 	@Override
 	public boolean add(Note newNote) {
 		// TODO Auto-generated method stub
