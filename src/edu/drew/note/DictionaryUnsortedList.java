@@ -122,13 +122,25 @@ private class Node{
 
 	@Override
 	public boolean contains(Note note) {
-		// TODO Auto-generated method stub
+		Node n=firstNode;
+		while(n!=null){
+			if(n.Note.equals(note)){
+				return true;
+			}
+			n=n.next;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean contains(long ID) {
-		// TODO Auto-generated method stub
+		Node n=firstNode;
+		while(n!=null){
+			if(n.id==ID){
+				return true;
+			}
+			n=n.next;
+		}
 		return false;
 	}
 	
