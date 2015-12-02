@@ -7,7 +7,8 @@ public class SelectionSort implements SortInterface{
 		int tempIndex = 0;
 		for (int i = 0; i < s.length; i++) {
 			tempIndex = i;
-			for (int j = 0; j < s.length; j++) {
+			temp = s[i];
+			for (int j = i+1; j < s.length; j++) {
 				if (s[j].getID()<s[i].getID() || s[j].getID()<temp.getID()) {
 					temp = s[j];
 					tempIndex = j;
@@ -18,4 +19,5 @@ public class SelectionSort implements SortInterface{
 		}
 		return s;
 	}
+	
 }
