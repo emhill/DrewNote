@@ -49,7 +49,16 @@ public int getSize() {
 @Override
 public boolean contains(Note note) {
 	// TODO Auto-generated method stub
-	return false;
+	boolean found = false;
+	int i = 0;
+	while(!found && (i < s.length))
+	{
+		if(note.equals(s[i]))
+			found = true;
+		    i++;
+	}
+	return found;
+	
 }
 @Override
 public boolean contains(long ID) {
@@ -60,7 +69,7 @@ public boolean contains(long ID) {
 public Note[] toArray() {
 	// TODO Auto-generated method stub
 	Note[] result = (Note[]) new Object[numEntries];
-	for(int i =0; i < numEntries; i++)
+	for(int i= 0; i < numEntries; i++)
 		result[i] = s[i];
 	return result;
 	
