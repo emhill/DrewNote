@@ -1,6 +1,6 @@
 package edu.drew.note;
 
-public class DictionaryUnsortedList<T> implements NoteCollection<T>{
+public class DictionaryUnsortedList<T> implements NoteCollection{
 
 private Node firstNode;
 private int numEntries;
@@ -23,7 +23,7 @@ private class Node{
 
 	@Override
 	public boolean add(Note newNote){
-		firstNode=new Node(Note.getID(),newNote,firstNode);
+		firstNode=new Node(newNote.getID(),newNote,firstNode);
 		numEntries++;
 		return true;
 	}
