@@ -3,17 +3,16 @@ package edu.drew.note;
 public class UnsortedArray<T> implements NoteCollection {
 private Note [] s;
 private int numEntries;
-private int head;
 public UnsortedArray(){
 	 s = (Note[])new Object[numEntries];
 	 numEntries = 0;
-	 head = 0;
+	
 	 
 	
 }
 public boolean add(Note newNote) {
 	if(isEmpty()){
-	s [head] = newNote;
+	s [numEntries] = newNote;
 	numEntries ++;
 	
 	return true;
@@ -30,6 +29,15 @@ public boolean remove(long ID) {
 }
 public boolean remove(Note note) {
 	// TODO Auto-generated method stub
+	for(int i = 0; i< numEntries; i ++){
+		if(s[i].equals(note)){
+			s[i] = s[numEntries -1];
+			numEntries--;
+			s[numEntries] = null;
+			return true;
+		}
+			
+	}
 	return false;
 }
 public boolean isEmpty() {
@@ -55,6 +63,7 @@ public boolean contains(Note note) {
 }
 public boolean contains(long ID) {
 	// TODO Auto-generated method stub
+	
 	return false;
 }
 public Note[] toArray() {
@@ -63,6 +72,11 @@ public Note[] toArray() {
 	for(int i= 0; i < numEntries; i++)
 		result[i] = s[i];
 	return result;
+	
+}
+@Override
+public void add(String string) {
+	// TODO Auto-generated method stub
 	
 }
 	
