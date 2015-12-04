@@ -1,6 +1,6 @@
 package edu.drew.note;
 
-public class UnsortedArray<T> implements NoteCollection<T> {
+public class UnsortedArray<T> implements NoteCollection {
 private Note [] s;
 private int numEntries;
 private int head;
