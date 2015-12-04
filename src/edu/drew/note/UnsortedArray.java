@@ -42,7 +42,7 @@ public boolean remove(Note note) {
 }
 public boolean isEmpty() {
 	
-	return s == null;
+	return numEntries == 0;
 }
 public int getSize() {
 	// TODO Auto-generated method stub
@@ -74,10 +74,6 @@ public Note[] toArray() {
 	return result;
 	
 }
-@Override
-public void add(String string) {
-	// TODO Auto-generated method stub
-	
-}
+
 	
 }
