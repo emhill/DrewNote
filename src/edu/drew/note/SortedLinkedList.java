@@ -71,7 +71,7 @@ public class SortedLinkedList implements NoteCollection {
 		  private Node next; // Pointer to next note in the dictionary
 
 			private Node(Note newNote, Node head) {
-				this(newNote, head, null);	
+				this(10, note,null);	
 			} 
 			
 			private Node(long id, Note note, Node nextNode) {
