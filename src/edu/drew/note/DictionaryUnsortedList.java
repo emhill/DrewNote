@@ -2,24 +2,24 @@ package edu.drew.note;
 
 public class DictionaryUnsortedList<T> implements NoteCollection{
 
-private Node firstNode;
-private int numEntries;
-
-private class Node{
-	private long id;
-	private Note Note;
-	private Node next;
+	private Node firstNode;
+	private int numEntries;
 	
-	private Node(long key, Note value){
-		this(key,value,null);
+	private class Node{
+		private long id;
+		private Note Note;
+		private Node next;
+		
+		private Node(long key, Note value){
+			this(key,value,null);
+		}
+		
+		private Node(long key, Note value, Node nextNode){
+			id=key;
+			Note=value;
+			next=nextNode;
+		}
 	}
-	
-	private Node(long key, Note value, Node nextNode){
-		id=key;
-		Note=value;
-		next=nextNode;
-	}
-}
 
 	@Override
 	public boolean add(Note newNote){
