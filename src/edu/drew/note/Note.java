@@ -13,6 +13,10 @@ public class Note {
 	private long id;
 	private static long id_counter = 1;
 	
+	public Note() {
+		this("", "");
+	}
+	
 	public Note(String t, String txt) {
 		title = t;
 		text = txt;
