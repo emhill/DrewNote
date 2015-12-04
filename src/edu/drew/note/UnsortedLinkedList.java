@@ -1,14 +1,15 @@
 package edu.drew.note;
 
 
-public class LinkedList<T> implements NoteCollection {
+
+public class UnsortedLinkedList<T> implements NoteCollection {
 
 
 		
 		public Node firstNote;
 		public int numberOfEntries;
 		
-		public LinkedList() {
+		public UnsortedLinkedList() {
 			numberOfEntries = 0;
 			firstNote = null;
 		}
@@ -30,15 +31,11 @@ public class LinkedList<T> implements NoteCollection {
 		} // Change T's to notes and print each notes!!
 
 		
-		
 		@Override
 		public boolean add(Note newNote) {
-			//Note<T> newNote = new Note<T>(newEntry);
-			newNote.setNextNote(firstNote);
 			
-			firstNote = newNote;
+			firstNote = new Node(newNote, firstNote);
 			numberOfEntries++;
-			
 			return true;
 		}
 
@@ -78,14 +75,14 @@ public class LinkedList<T> implements NoteCollection {
 	@Override
 	public boolean contains(Note note) {
 		boolean found = false;
-		Note currentNote = firstNote;
-		
-		while(!found && (currentNote != null)) {
-			if (newEntry.equals(currentNote.data))
-				found = true;
-			else
-				currentNote = currentNote.next;
-		}
+//		Note currentNote = firstNote;
+//		
+//		while(!found && (currentNote != null)) {
+//			if (newEntry.equals(currentNote.data))
+//				found = true;
+//			else
+//				currentNote = currentNote.next;
+//		}
 		return found;
 	}
 
@@ -97,17 +94,25 @@ public class LinkedList<T> implements NoteCollection {
 
 	@Override
 	public Note[] toArray() {
-		Note[] result = (Note[]) new Object[numberOfEntries];
-		
-		int index = 0;
-		
-		Note currentNote = firstNote;
-		while((index < numberOfEntries) && (currentNote != null)) {
-			result[index] = currentNote.data;
-			index++;
-			currentNote = currentNote.next;
+		Note[] array = new Note[numberOfEntries];
+		Node n = firstNote;
+		int i = 0;
+		while (n != null) { // could also be for i < numEntries
+			// do something -- copy
+			array[i] = n.data;
+			i++;
+			n = n.next;
 		}
-		return result;
+		return array;
 	}
-
+	public static void main(String[] args) {
+		UnsortedLinkedList<Note> LL = new UnsortedLinkedList<Note>();
+		LL.add(new Note());
+		LL.add(new Note());
+		Note[] array = LL.toArray();
+		for (int i = 0; i < array.length; i++){
+			System.out.println(array[i]);
+			
+		}
+	}
 }
