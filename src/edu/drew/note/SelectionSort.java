@@ -1,3 +1,5 @@
+//Emily Evans
+
 package edu.drew.note;
 
 public class SelectionSort implements SortInterface{
