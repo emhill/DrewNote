@@ -4,7 +4,7 @@ public class UnsortedArray<T> implements NoteCollection {
 private Note [] s;
 private int numEntries;
 public UnsortedArray(){
-	 s = (Note[])new Object[numEntries];
+	 s = new Note[numEntries];
 	 numEntries = 0;
 	
 	 
