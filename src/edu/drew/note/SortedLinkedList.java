@@ -1,8 +1,5 @@
 package edu.drew.note;
 
-
-
-
 public class SortedLinkedList implements NoteCollection {
 	private Node head;
 	private int numEntries;
@@ -10,74 +7,107 @@ public class SortedLinkedList implements NoteCollection {
 		head = null;
 		numEntries = 0;
 	}
-	@Override
+	
 	public boolean add(Note newNote) {
-		// TODO Auto-generated method stub
 		Node newNode = new Node(newNote, head);
 		numEntries ++;
 		return true;
 	}
-
-	@Override
+	
 	public Note lookup(long ID) {
-		// TODO Auto-generated method stub
-		return null;
+	    Node n = head;
+	    Node prev = head;
+		if (numEntries == 0) {
+	        return null;
+	    }
+		
+		boolean found = false;
+	    
+		while(n != null) {
+	        if(n.data.equals(ID)) {
+	            found = true;
+	            break;
+	        }
+	        n = n.next;
+	    }
+	    return n.data;
 	}
 
-	@Override
 	public boolean remove(long ID) {
-		// TODO Auto-generated method stub
+		Node n = head;
+		Node prev = head;
+		while (n != null); {
+			if (n.data.equals(ID)) {
+				prev.next = n.next;
+				return true;
+			}
+			prev = n;
+			n = n.next;
+		}
 		return false;
 	}
 
-	@Override
 	public boolean remove(Note note) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
 		return numEntries == 0;
 	}
 
-	@Override
 	public int getSize() {
-		// TODO Auto-generated method stub
 		return numEntries;
 	}
 
-	@Override
 	public boolean contains(Note note) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public boolean contains(long ID) {
-		// TODO Auto-generated method stub
+		Node n = head;
+		while (n != null) {
+			if (n.data.equals(ID)) {
+				return true;
+			}
+			n = n.next;
+		}
 		return false;
 	}
 
-	@Override
 	public Note[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		Note[] array = (Note[]) new Object[numEntries];
+		Node n = head;
+		int i = 0;
+		while (n != null) {
+			array[i] = n.data;
+			i++;
+			n = n.next;
+		}
+		return array;
 	}
+	
 	private class Node {
-		  private int id; // Note's id
-		  private Note note; // Note Obj
-		  private Node next; // Pointer to next note in the dictionary
+		private int id; // Note's id
+		private Note data; //Note's data
+		private Note note; // Note Obj
+		private Node next; // Pointer to next note in the dictionary
 
+<<<<<<< HEAD
 			private Node(Note newNote, Node head) {
 				this(10, note,null);	
 			} 
+=======
+		private Node(Note newNote, Node head) {
+			this(newNote, head, null);	
+		} 
+>>>>>>> b9a552658a0ed3da356de82e35c3dfb91b08d2a8
 			
-			private Node(long id, Note note, Node nextNode) {
-				id = id; // Unique ID of note
-				note = note; // Note stored here
-				next = nextNode; // Pointer to next note
-			} 
-		}
+		private Node(Note newNote, Node Note, Node nextNode) {
+			newNote = newNote; // Unique ID of note
+			Note = Note; // Note stored here
+			next = nextNode; // Pointer to next note
+		} 
+	}
 }
