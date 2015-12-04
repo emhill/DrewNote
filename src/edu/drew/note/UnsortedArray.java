@@ -1,32 +1,46 @@
 package edu.drew.note;
 
+import java.util.Arrays;
+
 public class UnsortedArray<T> implements NoteCollection {
 private Note [] s;
 private int numEntries;
-public UnsortedArray(){
-	 s = new Note[numEntries];
+public UnsortedArray(int capacity){
+	 s = new Note[capacity];
 	 numEntries = 0;
 	
 	 
 	
 }
+@Override
 public boolean add(Note newNote) {
-	if(isEmpty()){
+	if(!isArrayFull()){
 	s [numEntries] = newNote;
 	numEntries ++;
-	
 	return true;
 }
 	return false;
 }
+
+private boolean isArrayFull() {
+			//return true if array is full
+			return numEntries >= s.length;
+		}
+@Override
 public Note lookup(long ID) {
 	// TODO Auto-generated method stub
-	return null;
+	for(int i = 0; i < s.length;i++){
+		if(ID == i){
+			return Note;
+		}
+	}
+	
 }
 public boolean remove(long ID) {
 	// TODO Auto-generated method stub
 	return false;
 }
+@Override
 public boolean remove(Note note) {
 	// TODO Auto-generated method stub
 	for(int i = 0; i< numEntries; i ++){
@@ -40,14 +54,17 @@ public boolean remove(Note note) {
 	}
 	return false;
 }
+@Override
 public boolean isEmpty() {
 	
 	return numEntries == 0;
 }
+@Override
 public int getSize() {
 	// TODO Auto-generated method stub
 	return numEntries;
 }
+@Override
 public boolean contains(Note note) {
 	// TODO Auto-generated method stub
 	boolean found = false;
@@ -61,18 +78,19 @@ public boolean contains(Note note) {
 	return found;
 	
 }
+@Override
 public boolean contains(long ID) {
 	// TODO Auto-generated method stub
 	
 	return false;
 }
+@Override
 public Note[] toArray() {
 	// TODO Auto-generated method stub
 	Note[] result = (Note[]) new Object[numEntries];
-	for(int i= 0; i < numEntries; i++)
-		result[i] = s[i];
-	return result;
-	
+    for(int i = 0; i <numEntries; i++)
+    	result[i] = s[i];
+    return result;
 }
 
 	
