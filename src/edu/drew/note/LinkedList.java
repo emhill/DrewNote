@@ -1,18 +1,36 @@
 package edu.drew.note;
 
-public class LinkedList<T> implements NoteCollection<T> {
+
+public class LinkedList<T> implements NoteCollection {
 
 
-		public T data; //entry
-		public Note firstNote;
-		public Note next; //link to next note
+		
+		public Node firstNote;
 		public int numberOfEntries;
 		
 		public LinkedList() {
 			numberOfEntries = 0;
 			firstNote = null;
 		}
+		private class Node 
+		{
+		  private Note    data; // Entry in bag
+		  private Node next; // Link to next node
 
+			private Node(Note dataPortion)
+			{
+				this(dataPortion, null);	
+			} // end constructor
+			
+			private Node(Note dataPortion, Node nextNode)
+			{
+				data = dataPortion;
+				next = nextNode;	
+			} // end constructor
+		} // Change T's to notes and print each notes!!
+
+		
+		
 		@Override
 		public boolean add(Note newNote) {
 			//Note<T> newNote = new Note<T>(newEntry);
