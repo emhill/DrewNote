@@ -1,15 +1,25 @@
 package edu.drew.note;
 
-public class NoteDictionary implements NoteCollection{
+// Implementation of a sorted note dictionary create my Chris Thurber
 
-	private Node head = null;
+public class DictionarySortedList implements NoteCollection{
+
+	private Node head;
 	private int numEntries = 0;
 	
 	// Adds item to data structure
 	public boolean add(Note note) {
-		head = new Node(note.getID(), note, head);
-		numEntries++; // Update number of notes
-		return true; // Node added
+		if (note != null && numEntries == 0) {
+			head = new Node(note);
+			numEntries++; 
+			return true; // Node added
+		}
+		else if (note != null) {
+			head = new Node(note, head);
+			numEntries++; 
+			return true; // Node added
+		}
+		return false;
 	}
 	
 	// Inserts note at specific location
@@ -24,7 +34,7 @@ public class NoteDictionary implements NoteCollection{
 				n = n.next;
 				count++;
 			}
-			prev.next = new Node(note.getID(),note,n);
+			prev.next = new Node(note,n);
 			numEntries++;
 			return true;
 		}
@@ -32,16 +42,21 @@ public class NoteDictionary implements NoteCollection{
 	
 	// Returns ID of note removed
 	public long remove() {
-		long removed = head.id;
+		long removed = head.note.getID();
 		head = head.next;
+		numEntries--;
 		return removed;
 	}
 
 	// Removes Note object 'note' from the data structure
 	public boolean remove(Note note) {
+		if (note == null || numEntries == 0) {
+			return false;
+		}
 		Node n = head;
-		while(n!=null) {
+		while(n.note!=null) {
 			if(n.note.equals(note)) {
+				numEntries--;
 				return true;
 			}
 			n=n.next;
@@ -53,11 +68,16 @@ public class NoteDictionary implements NoteCollection{
 	public boolean remove(long ID) {
 		Node n = head;
 		Node prev = head;
-		while(n!=null) {
-			if(n.id == ID){
+		if(numEntries == 0) {
+			return false;
+		}
+		while(n.note!=null) {
+			System.out.println("ID "+n.note.getID());
+			if(n.note.getID() == ID){
 				prev.next = n.next;
+				numEntries--;
 				return true;
-			}
+			} 
 			prev = n;
 			n=n.next;
 		}
@@ -67,8 +87,9 @@ public class NoteDictionary implements NoteCollection{
 	// Searches the data structure for a note with 'ID'
 	public Note lookup(long ID) {
 		Node n = head;
-		while(n!=null){
-			if(n.note.getID() ==ID) {
+		while(n.note!=null){
+			System.out.println("This is "+n.note.getID());
+			if(n.note.getID() == ID) {
 				return n.note;
 			}
 			n=n.next;
@@ -79,7 +100,7 @@ public class NoteDictionary implements NoteCollection{
 	// Checks if the data structure contains 'note'
 	public boolean contains(Note note) {
 		Node n  = head;
-		while(n!=null) {
+		while(n.note!=null) {
 			if(n.note.equals(note)) {
 				return true;
 			}
@@ -91,7 +112,7 @@ public class NoteDictionary implements NoteCollection{
 	// Checks if the data structure contains a note with 'ID'
 	public boolean contains(long ID) {
 		Node n = head;
-		while(n!=null) {
+		while(n.note!=null) {
 			if(n.note.getID() == ID) {
 				return true;
 			}
@@ -104,7 +125,7 @@ public class NoteDictionary implements NoteCollection{
 		Node n = head;
 		Node next = head.next;
 		while(n!=null) {
-			if(n.id == ID){
+			if(n.note.getID() == ID){
 				n = note;
 				n.next = next;
 				return true;
@@ -117,7 +138,7 @@ public class NoteDictionary implements NoteCollection{
 	
 	// Clears out the data structure
 	public void clear() {
-		head = null;
+		head = new Node();
 		numEntries = 0;
 	}
 
@@ -136,7 +157,7 @@ public class NoteDictionary implements NoteCollection{
 		Note[] notes = new Note[getSize()];
 		Node n = head;
 		for(int i=0;i<getSize(); i++) {
-			notes[i] = head.note;
+			notes[i] = n.note;
 			n=n.next;
 		}
 		return notes;
@@ -146,30 +167,33 @@ public class NoteDictionary implements NoteCollection{
 	public String toString(){
 		String dict="{";
 		Node n = head;
-		while(n.next!=null){
-			dict += "'"+n.id+"' : '"+n.note.getTitle()+"', ";
+		while(n.next.note!=null){
+			dict += "'"+n.note.getID()+"' : '"+n.note.getTitle()+"', ";
 			n=n.next;
 		}
-		dict += "'"+numEntries+"' : '"+n.note.getTitle()+"'";
 		dict+="}";
 		return dict;
 	}
 	
 	// Node class imported from other projects; modified to stores note ids and Text
 	private class Node {
-	  private int id; // Note's id
-	  private Note note; // Note Obj
-	  private Node next; // Pointer to next note in the dictionary
+		private Note note; // Note Obj
+		private Node next; // Pointer to next note in the dictionary
+	
+		public Node() {
+			note = new Note();
+			next = null;
+		}
 
-		private Node(long id, Note note) {
-			this(id, note, null);	
+		private Node(Note note) {
+			this(note, null);	
 		} 
-		
-		private Node(long id, Note note, Node nextNode) {
-			id = id; // Unique ID of note
+			
+		private Node(Note note, Node nextNode) {
 			note = note; // Note stored here
 			next = nextNode; // Pointer to next note
-		} 
-	}
+		}
 
+	}
+	
 }
