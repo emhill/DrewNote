@@ -134,7 +134,7 @@ public class DictionarySortedList implements NoteCollection {
 	public boolean remove(long ID) {
 		
 		Node n = head;
-		Node prev = head;
+		Node prev = null;
 		while(n!=null) {
 			if(n.note.getID() == ID) {
 				if (prev == null) {
