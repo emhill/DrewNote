@@ -78,7 +78,7 @@ public class DictionarySortedListTest extends TestCase {
 		assertTrue(notes.contains(n));
 	}
 	
-	/*@Test
+	@Test
 	public void testAddMany() {
 		notes.clear();
 		int size = addManyElements();
@@ -89,7 +89,7 @@ public class DictionarySortedListTest extends TestCase {
 		}
 	}
 	
-	@Test
+	/*@Test
 	public void testAddManyShuffled() {
 		notes = new DictionarySortedList();
 		for (int i = 0; i < SIZE; i++)
@@ -145,7 +145,9 @@ public class DictionarySortedListTest extends TestCase {
 	public void testRemoveManyNotes() {
 		int size = addManyElements();
 		for (int i = 0; i < size; i++) {
-			notes.remove(array[i]);
+			// notes.remove(array[i]);
+			System.out.println("RemovedByNote "+array[i].getID()+": "+notes.remove(array[i]));
+			System.out.println("ContainsByNote "+array[i].getID()+": "+notes.contains(array[i].getID()));
 			assertFalse(notes.contains(array[i]));
 		}
 	}
@@ -154,7 +156,10 @@ public class DictionarySortedListTest extends TestCase {
 	public void testRemoveManyNotesByID() {
 		int size = addManyElements();
 		for (int i = 0; i < size; i++) {
-			notes.remove(array[i].getID());
+			// notes.remove(array[i].getID());
+			System.out.println("Size: "+notes.getSize());
+			System.out.println("RemovedByID "+array[i].getID()+": "+notes.remove(array[i].getID()));
+			System.out.println("ContainsByID "+array[i].getID()+": "+notes.contains(array[i].getID()));
 			assertFalse(notes.contains(array[i].getID()));
 		}
 	}

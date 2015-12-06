@@ -42,6 +42,7 @@ public class DictionarySortedList implements NoteCollection {
 	}*/
 	
 	// Adds item to data structure in order of Note's ID 
+	// -- Not working for "many" cases
 	public boolean add(Note note) {
 		if(note != null) {
 			Node n = head;
@@ -64,11 +65,15 @@ public class DictionarySortedList implements NoteCollection {
 					n = n.next;
 				} 
 			}
+			Node t = new Node(note, n.next);
+			n.next = t;
+			numEntries++;
+			return true;
 		}
 		return false;
 	}
 	
-	// Adds item to data structure; regular add method
+	// Adds item to data structure
 	/*public boolean add(Note note) {
 		if (note != null) {
 			head = new Node(note, head);
@@ -106,12 +111,17 @@ public class DictionarySortedList implements NoteCollection {
 
 	// Removes Note object 'note' from the data structure
 	public boolean remove(Note note) {
+		
 		Node n = head;
 		Node prev = head;
 		while(n!=null) {
 			if(n.note.equals(note)) {
-				prev.next = n.next;
-				numEntries--;
+				if (prev == null) {
+					head = head.next;
+				}
+				else {
+					prev.next = n.next; // all other cases
+				}
 				return true;
 			}
 			prev = n;
@@ -122,17 +132,17 @@ public class DictionarySortedList implements NoteCollection {
 	
 	// Removes specific item from data structure with 'id'
 	public boolean remove(long ID) {
-		if(numEntries == 1) {
-			head = new Node();
-			numEntries--;
-			return true;
-		}
+		
 		Node n = head;
 		Node prev = head;
 		while(n!=null) {
 			if(n.note.getID() == ID) {
-				prev.next = n.next;
-				numEntries--;
+				if (prev == null) {
+					head = head.next;
+				}
+				else {
+					prev.next = n.next; // all other cases
+				}
 				return true;
 			}
 			prev = n;
