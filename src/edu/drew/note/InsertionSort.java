@@ -1,19 +1,22 @@
 package edu.drew.note;
 
-//public class insertion_sort {
+public class InsertionSort implements SortInterface {  //find the least and bring it to the beginning of the array 
 
-/*
-	// pseudocode:
-	 * 
-	 * 
-	public static void insertion_code (int [] a) {
-		for j = 2 to A.length; //loop through each element
-				key = A[j]; //temporary variable used to hold the element we are comparing
-				i = j - 1; //look at number right in front of the key 
-				while (i > 0 && A[i] > key) //if element is greater than the key
-					A[i+1] = A[i] //move element into open spot behind it 
-					i = i - 1 //reset i to 0
-				A[i+1] = key
+	//sorts the array entries a[first] through a[last] iteratively
+	public Note[] sort(Note[] s) {
+		for (int j = s.length-1; j < 0; j--) {
+			Note temp = s[j]; 
+			int i = j-1; 
+			while (temp.getID() < s[i].getID()) { //goes thru the array 
+				s[i+1] = s[i]; //overriding the position of the element of s (which is the last element)
+				i--; //indexes within the array
+			}
+			//what happens when temp.getID() > s[i].getID()
+			s[i] = temp;
+		}
+		return s;
 	}
 }
-*/
+
+
+
