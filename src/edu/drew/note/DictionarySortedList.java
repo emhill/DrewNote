@@ -4,17 +4,22 @@ package edu.drew.note;
 
 public class DictionarySortedList implements NoteCollection{
 
-	private Node head = new Node();
+	private Node head;
 	private int numEntries = 0;
 	
 	// Adds item to data structure
 	public boolean add(Note note) {
-		if (note == null) {
-			return false;
+		if (note != null && numEntries == 0) {
+			head = new Node(note);
+			numEntries++; 
+			return true; // Node added
 		}
-		head = new Node(note, head);
-		numEntries++; // Update number of notes
-		return true; // Node added
+		else if (note != null) {
+			head = new Node(note, head);
+			numEntries++; 
+			return true; // Node added
+		}
+		return false;
 	}
 	
 	// Inserts note at specific location
@@ -37,16 +42,21 @@ public class DictionarySortedList implements NoteCollection{
 	
 	// Returns ID of note removed
 	public long remove() {
-		long removed = head.id;
+		long removed = head.note.getID();
 		head = head.next;
+		numEntries--;
 		return removed;
 	}
 
 	// Removes Note object 'note' from the data structure
 	public boolean remove(Note note) {
+		if (note == null || numEntries == 0) {
+			return false;
+		}
 		Node n = head;
-		while(n!=null) {
+		while(n.note!=null) {
 			if(n.note.equals(note)) {
+				numEntries--;
 				return true;
 			}
 			n=n.next;
@@ -58,11 +68,16 @@ public class DictionarySortedList implements NoteCollection{
 	public boolean remove(long ID) {
 		Node n = head;
 		Node prev = head;
-		while(n!=null) {
-			if(n.id == ID){
+		if(numEntries == 0) {
+			return false;
+		}
+		while(n.note!=null) {
+			System.out.println("ID "+n.note.getID());
+			if(n.note.getID() == ID){
 				prev.next = n.next;
+				numEntries--;
 				return true;
-			}
+			} 
 			prev = n;
 			n=n.next;
 		}
@@ -72,8 +87,9 @@ public class DictionarySortedList implements NoteCollection{
 	// Searches the data structure for a note with 'ID'
 	public Note lookup(long ID) {
 		Node n = head;
-		while(n!=null){
-			if(n.note.getID() ==ID) {
+		while(n.note!=null){
+			System.out.println("This is "+n.note.getID());
+			if(n.note.getID() == ID) {
 				return n.note;
 			}
 			n=n.next;
@@ -84,7 +100,7 @@ public class DictionarySortedList implements NoteCollection{
 	// Checks if the data structure contains 'note'
 	public boolean contains(Note note) {
 		Node n  = head;
-		while(n!=null) {
+		while(n.note!=null) {
 			if(n.note.equals(note)) {
 				return true;
 			}
@@ -96,7 +112,7 @@ public class DictionarySortedList implements NoteCollection{
 	// Checks if the data structure contains a note with 'ID'
 	public boolean contains(long ID) {
 		Node n = head;
-		while(n!=null) {
+		while(n.note!=null) {
 			if(n.note.getID() == ID) {
 				return true;
 			}
@@ -109,7 +125,7 @@ public class DictionarySortedList implements NoteCollection{
 		Node n = head;
 		Node next = head.next;
 		while(n!=null) {
-			if(n.id == ID){
+			if(n.note.getID() == ID){
 				n = note;
 				n.next = next;
 				return true;
@@ -122,7 +138,7 @@ public class DictionarySortedList implements NoteCollection{
 	
 	// Clears out the data structure
 	public void clear() {
-		head = null;
+		head = new Node();
 		numEntries = 0;
 	}
 
@@ -141,7 +157,7 @@ public class DictionarySortedList implements NoteCollection{
 		Note[] notes = new Note[getSize()];
 		Node n = head;
 		for(int i=0;i<getSize(); i++) {
-			notes[i] = head.note;
+			notes[i] = n.note;
 			n=n.next;
 		}
 		return notes;
@@ -151,23 +167,21 @@ public class DictionarySortedList implements NoteCollection{
 	public String toString(){
 		String dict="{";
 		Node n = head;
-		while(n.next!=null){
-			dict += "'"+n.id+"' : '"+n.note.getTitle()+"', ";
+		while(n.next.note!=null){
+			dict += "'"+n.note.getID()+"' : '"+n.note.getTitle()+"', ";
 			n=n.next;
 		}
-		dict += "'"+numEntries+"' : '"+n.note.getTitle()+"'";
 		dict+="}";
 		return dict;
 	}
 	
 	// Node class imported from other projects; modified to stores note ids and Text
 	private class Node {
-		private int id; // Note's id
 		private Note note; // Note Obj
 		private Node next; // Pointer to next note in the dictionary
 	
 		public Node() {
-			note = null;
+			note = new Note();
 			next = null;
 		}
 
@@ -180,14 +194,6 @@ public class DictionarySortedList implements NoteCollection{
 			next = nextNode; // Pointer to next note
 		}
 
-	}
-
-	public static void main(String[] args) {
-		DictionarySortedList thing = new DictionarySortedList();
-		Note a = new Note("Hello","hello");
-		thing.add(a);
-		thing.add(a);
-		thing.contains(a);
 	}
 	
 }

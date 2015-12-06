@@ -8,7 +8,7 @@ import edu.drew.note.DictionarySortedList;
 import edu.drew.note.Note;
 
 public class DictionarySortedListTest extends TestCase {
-	private static final int SIZE = 10;
+	private static final int SIZE = 100;
 	private Note[] array = new Note[SIZE];
 	private Note[] shuffled=new Note[SIZE];
 	private DictionarySortedList notes = new DictionarySortedList();
@@ -17,7 +17,7 @@ public class DictionarySortedListTest extends TestCase {
 	protected void setUp() {
 		array = new Note[SIZE];
 		for (int i = 0; i < SIZE; i++){
-			array[i] = new Note();
+			array[i] = new Note("HELLO","It's me, Adelle");
 			shuffled[i]=array[i];
 		}
 		shuffleArray(shuffled);
@@ -80,12 +80,12 @@ public class DictionarySortedListTest extends TestCase {
 	
 	@Test
 	public void testAddMany() {
+		notes.clear();
 		int size = addManyElements();
 		assertEquals(size, notes.getSize());
 		for (int i = 0; i < size; i++) {
 			assertTrue(notes.contains(array[i].getID()));
 			assertTrue(notes.contains(array[i]));
-			
 		}
 	}
 	
@@ -103,9 +103,17 @@ public class DictionarySortedListTest extends TestCase {
 	
 	@Test
 	public void testLookupOne() {
-		Note n = addOneElement();
-		assertEquals(n, notes.lookup(n.getID()));
-		assertTrue(notes.contains(n));
+		//Note n = addOneElement();
+		DictionarySortedList q = new DictionarySortedList();
+		Note n = new Note("HI!","Its adele");
+		Note v = new Note("HI!","Its adele");
+		q.add(n);
+		q.add(v);
+		System.out.println("Dictionary:" +q.toString());
+		System.out.println("Looking for: "+n.getID());
+		System.out.println(n.getID()+" == "+q.lookup(n.getID())); 
+		assertEquals(n, q.lookup(n.getID()));
+		assertTrue(q.contains(n));
 	}
 	
 	@Test
@@ -136,9 +144,9 @@ public class DictionarySortedListTest extends TestCase {
 		notes = new DictionarySortedList();
 		Note n = new Note();
 		// below should throw no exceptions!
-		notes.remove(n.getID()); 
-		notes.remove(n);
 		notes.remove(null);
+		notes.remove(n);
+		notes.remove(n.getID()); 
 	}
 	
 	@Test

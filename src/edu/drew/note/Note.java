@@ -23,8 +23,8 @@ public class Note implements Comparable {
 		id = id_counter++;
 	}
 	
-	public void tag(String t) {
-		tags.add(t);
+	public void tag(String tag) {
+		tags.add(tag);
 	}
 	
 	public String getTitle() {
