@@ -1,13 +1,18 @@
 package edu.drew.note;
 
-public class NoteDictionary implements NoteCollection{
+// Implementation of a sorted note dictionary create my Chris Thurber
 
-	private Node head = null;
+public class DictionarySortedList implements NoteCollection{
+
+	private Node head = new Node();
 	private int numEntries = 0;
 	
 	// Adds item to data structure
 	public boolean add(Note note) {
-		head = new Node(note.getID(), note, head);
+		if (note == null) {
+			return false;
+		}
+		head = new Node(note, head);
 		numEntries++; // Update number of notes
 		return true; // Node added
 	}
@@ -24,7 +29,7 @@ public class NoteDictionary implements NoteCollection{
 				n = n.next;
 				count++;
 			}
-			prev.next = new Node(note.getID(),note,n);
+			prev.next = new Node(note,n);
 			numEntries++;
 			return true;
 		}
@@ -157,19 +162,32 @@ public class NoteDictionary implements NoteCollection{
 	
 	// Node class imported from other projects; modified to stores note ids and Text
 	private class Node {
-	  private int id; // Note's id
-	  private Note note; // Note Obj
-	  private Node next; // Pointer to next note in the dictionary
+		private int id; // Note's id
+		private Note note; // Note Obj
+		private Node next; // Pointer to next note in the dictionary
+	
+		public Node() {
+			note = null;
+			next = null;
+		}
 
-		private Node(long id, Note note) {
-			this(id, note, null);	
+		private Node(Note note) {
+			this(note, null);	
 		} 
-		
-		private Node(long id, Note note, Node nextNode) {
-			id = id; // Unique ID of note
+			
+		private Node(Note note, Node nextNode) {
 			note = note; // Note stored here
 			next = nextNode; // Pointer to next note
-		} 
+		}
+
 	}
 
+	public static void main(String[] args) {
+		DictionarySortedList thing = new DictionarySortedList();
+		Note a = new Note("Hello","hello");
+		thing.add(a);
+		thing.add(a);
+		thing.contains(a);
+	}
+	
 }
