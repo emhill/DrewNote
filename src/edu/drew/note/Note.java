@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Note {
+public class Note implements Comparable {
 	private String title, text;
 	private Date created = new Date();
 	//private Date modified = new Date();
@@ -23,8 +23,8 @@ public class Note {
 		id = id_counter++;
 	}
 	
-	public void tag(String t) {
-		tags.add(t);
+	public void tag(String tag) {
+		tags.add(tag);
 	}
 	
 	public String getTitle() {
@@ -41,6 +41,10 @@ public class Note {
 	
 	public Set<String> getTags() {
 		return tags;
+	}
+	
+	public Date getCreated() {
+		return created;
 	}
 	
 	public String toString() {
@@ -63,5 +67,14 @@ public class Note {
 		
 		Note n2 = new Note("Testing", "The id counter");
 		System.out.println(n2);
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		if (o instanceof Note) {
+			Note n = (Note) o;
+			return (int) (this.id - n.getID());
+		}
+		throw new ClassCastException();
 	}
 }
