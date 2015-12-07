@@ -145,9 +145,7 @@ public class DictionarySortedListTest extends TestCase {
 	public void testRemoveManyNotes() {
 		int size = addManyElements();
 		for (int i = 0; i < size; i++) {
-			// notes.remove(array[i]);
-			System.out.println("RemovedByNote "+array[i].getID()+": "+notes.remove(array[i]));
-			System.out.println("ContainsByNote "+array[i].getID()+": "+notes.contains(array[i].getID()));
+			notes.remove(array[i]);
 			assertFalse(notes.contains(array[i]));
 		}
 	}
@@ -156,10 +154,7 @@ public class DictionarySortedListTest extends TestCase {
 	public void testRemoveManyNotesByID() {
 		int size = addManyElements();
 		for (int i = 0; i < size; i++) {
-			// notes.remove(array[i].getID());
-			System.out.println("Size: "+notes.getSize());
-			System.out.println("RemovedByID "+array[i].getID()+": "+notes.remove(array[i].getID()));
-			System.out.println("ContainsByID "+array[i].getID()+": "+notes.contains(array[i].getID()));
+			notes.remove(array[i].getID());
 			assertFalse(notes.contains(array[i].getID()));
 		}
 	}
