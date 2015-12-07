@@ -8,6 +8,7 @@ public class UnsortedArray implements NoteCollection {
 private Note [] s;
 private int numEntries;
 private static final int CAPACITY = 10;
+
 public UnsortedArray(int capacity){
 	 s = new Note[capacity];
 	 numEntries = 0;
@@ -22,7 +23,9 @@ public boolean add(Note newNote) {
 	numEntries ++;
 	return true;
 }
+	else{
 	return false;
+	}
 }
 
 private boolean isArrayFull() {
@@ -32,7 +35,7 @@ private boolean isArrayFull() {
 @Override
 public Note lookup(long ID) {
 	// TODO Auto-generated method stub
-	for(int i = 0; i < s.length;i++){
+	for(int i = 0; i < numEntries;i++){
 		if(ID == i){
 			return s[i];
 		}
@@ -100,6 +103,11 @@ public Note[] toArray() {
 	
     return Arrays.copyOf(s,numEntries);
 }
-
+public static void main(String[]args){
+	NoteCollection nc = new UnsortedArray(20);
+	nc.add(new Note());
+	nc.add(new Note());
+	Note [] a = nc.toArray();
+}
 	
 }
