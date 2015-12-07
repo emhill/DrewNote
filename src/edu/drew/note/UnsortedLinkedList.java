@@ -104,16 +104,8 @@ public class UnsortedLinkedList<T> implements NoteCollection {
 
 	@Override
 	public int getSize() {
-		Node n = firstNote;
-		int i = 0;
-		while (n != null) { 
-			// do something 
-			if (n.data.equals(n)) {
-				i++;
-			}
-			n = n.next;
-		}
-		return i; 
+		return numberOfEntries;
+
 	}
 
 	@Override
