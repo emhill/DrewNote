@@ -2,9 +2,12 @@ package edu.drew.note;
 
 import java.util.Arrays;
 
-public class UnsortedArray<T> implements NoteCollection {
+
+
+public class UnsortedArray implements NoteCollection {
 private Note [] s;
 private int numEntries;
+private static final int CAPACITY = 10;
 public UnsortedArray(int capacity){
 	 s = new Note[capacity];
 	 numEntries = 0;
@@ -31,14 +34,24 @@ public Note lookup(long ID) {
 	// TODO Auto-generated method stub
 	for(int i = 0; i < s.length;i++){
 		if(ID == i){
-			return Note;
+			return s[i];
 		}
+		
 	}
-	
+	return null;
 }
 public boolean remove(long ID) {
 	// TODO Auto-generated method stub
+	
+	
 	return false;
+	
+
+}
+@Override
+public int getSize() {
+	// TODO Auto-generated method stub
+	return numEntries;
 }
 @Override
 public boolean remove(Note note) {
@@ -59,11 +72,7 @@ public boolean isEmpty() {
 	
 	return numEntries == 0;
 }
-@Override
-public int getSize() {
-	// TODO Auto-generated method stub
-	return numEntries;
-}
+
 @Override
 public boolean contains(Note note) {
 	// TODO Auto-generated method stub
@@ -71,9 +80,10 @@ public boolean contains(Note note) {
 	int i = 0;
 	while(!found && (i < s.length))
 	{
-		if(note.equals(s[i]))
+		if(note.equals(s[i])){
 			found = true;
 		    i++;
+		}
 	}
 	return found;
 	
@@ -87,10 +97,8 @@ public boolean contains(long ID) {
 @Override
 public Note[] toArray() {
 	// TODO Auto-generated method stub
-	Note[] result = (Note[]) new Object[numEntries];
-    for(int i = 0; i <numEntries; i++)
-    	result[i] = s[i];
-    return result;
+	
+    return Arrays.copyOf(s,numEntries);
 }
 
 	
