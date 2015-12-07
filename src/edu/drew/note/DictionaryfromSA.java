@@ -2,7 +2,7 @@ package edu.drew.note;
 
 import java.util.Arrays;
 
-public class SortedArray implements NoteCollection{
+public class DictionaryfromSA implements NoteCollection{
 
 
 
@@ -14,7 +14,7 @@ public class SortedArray implements NoteCollection{
 	// Situational capacity #
 	private static final int DEFAULT_CAPACITY = 20;
 
-	public SortedArray(int capacity) {
+	public DictionaryfromSA(int capacity) {
 		array = (Note[]) new Object[capacity];
 
 		//should return a boolean, and add the note into the sorted array while also placing it 
