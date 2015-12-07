@@ -8,9 +8,10 @@ import org.junit.Test;
 
 import edu.drew.note.JavaSort;
 import edu.drew.note.Note;
+import edu.drew.note.SelectionSort;
 
 public class JavaSortTest {
-	JavaSort js = new JavaSort();
+	SelectionSort js = new SelectionSort();
 	private static final int SIZE = 100;
 	private Note[] array = new Note[SIZE];
 
