@@ -11,7 +11,7 @@ import edu.drew.note.UnsortedArray;
 public class UnsortedArrayTest {
 	private static final int SIZE = 100;
 	private Note[] array = new Note[SIZE];
-	private UnsortedArray notes = new UnsortedArray();
+	private UnsortedArray notes = new UnsortedArray(10);
 	
 	
 	protected void setUp() {
@@ -21,14 +21,14 @@ public class UnsortedArrayTest {
 	}
 
 	private Note addOneElement() {
-		notes = new UnsortedArray();
+		notes = new UnsortedArray(100);
 		Note n = new Note();
 		notes.add(n);
 		return n;
 	}
 	
 	private int addManyElements() {
-		notes = new UnsortedArray();
+		notes = new UnsortedArray(100);
 		for (int i = 0; i < SIZE; i++)
 			notes.add(array[i]);
 		return SIZE;
@@ -43,20 +43,20 @@ public class UnsortedArrayTest {
 	
 	@Test
 	public void testIsEmpty() {
-		notes = new UnsortedArray();
+		notes = new UnsortedArray(100);
 		assertTrue(notes.isEmpty());
 	}
 	
 	@Test
 	public void testIsNotEmpty() {
-		notes = new UnsortedArray();
+		notes = new UnsortedArray(100);
 		notes.add(new Note());
 		assertFalse(notes.isEmpty());
 	}
 	
 	@Test
 	public void testSizeOne() {
-		notes = new UnsortedArray();
+		notes = new UnsortedArray(100);
 		notes.add(new Note());
 		assertEquals(1, notes.getSize());
 	}
@@ -105,7 +105,7 @@ public class UnsortedArrayTest {
 	}
 	@Test
 	public void testRemoveEmpty() {
-		notes = new UnsortedArray();
+		notes = new UnsortedArray(100);
 		Note n = new Note();
 		// below should throw no exceptions!
 		notes.remove(n.getID()); 
@@ -133,7 +133,7 @@ public class UnsortedArrayTest {
 	
 	@Test
 	public void testToArrayEmpty() {
-		notes = new UnsortedArray();
+		notes = new UnsortedArray(100);
 		Note[] a = notes.toArray();
 		assertEquals(0, a.length);
 	}
