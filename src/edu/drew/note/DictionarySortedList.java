@@ -245,20 +245,24 @@ public class DictionarySortedList implements NoteCollection {
 	
 	// Node class imported from other projects; modified to stores note ids and Text
 	private class Node {
+		private long id;
 		private Note note; // Note Obj
 		private Node next; // Pointer to next note in the dictionary
 	
 		public Node() {
 			note = new Note();
+			id = note.getID();
 			next = null;
 		}
 
 		private Node(Note n) {
+			id = n.getID();
 			note = n;
 			next = null;
 		} 
 			
 		private Node(Note n, Node nextNode) {
+			id = n.getID();
 			note = n; // Note stored here
 			next = nextNode; // Pointer to next note
 		}
