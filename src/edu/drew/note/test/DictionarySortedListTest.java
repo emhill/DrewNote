@@ -89,7 +89,7 @@ public class DictionarySortedListTest extends TestCase {
 		}
 	}
 	
-	/*@Test
+	@Test
 	public void testAddManyShuffled() {
 		notes = new DictionarySortedList();
 		for (int i = 0; i < SIZE; i++)
@@ -99,7 +99,8 @@ public class DictionarySortedListTest extends TestCase {
 			assertTrue(notes.contains(array[i]));
 			assertTrue(notes.contains(array[i].getID()));
 		}
-	}*/
+		System.out.println("HERE: "+notes.toString());
+	}
 	
 	@Test
 	public void testLookupOne() {
@@ -145,9 +146,7 @@ public class DictionarySortedListTest extends TestCase {
 	public void testRemoveManyNotes() {
 		int size = addManyElements();
 		for (int i = 0; i < size; i++) {
-			// notes.remove(array[i]);
-			System.out.println("RemovedByNote "+array[i].getID()+": "+notes.remove(array[i]));
-			System.out.println("ContainsByNote "+array[i].getID()+": "+notes.contains(array[i].getID()));
+			notes.remove(array[i]);
 			assertFalse(notes.contains(array[i]));
 		}
 	}
@@ -156,28 +155,22 @@ public class DictionarySortedListTest extends TestCase {
 	public void testRemoveManyNotesByID() {
 		int size = addManyElements();
 		for (int i = 0; i < size; i++) {
-			// notes.remove(array[i].getID());
-			System.out.println("Size: "+notes.getSize());
-			System.out.println("RemovedByID "+array[i].getID()+": "+notes.remove(array[i].getID()));
-			System.out.println("ContainsByID "+array[i].getID()+": "+notes.contains(array[i].getID()));
+			notes.remove(array[i].getID());
 			assertFalse(notes.contains(array[i].getID()));
 		}
 	}
 	
-	/*@Test
+	@Test
 	public void testRemoveManyShuffledNotesByID() {
 		notes = new DictionarySortedList();
 		for (int i = 0; i < SIZE; i++)
 			notes.add(shuffled[i]);
 		assertEquals(SIZE, notes.getSize());
 		for (int i = 0; i < SIZE; i++) {
-			//notes.remove(array[i].getID());
-			System.out.println("numEntries: "+notes.getSize()+" vs. ArrayLen: "+SIZE);
-			System.out.println("Removed "+array[i].getID()+": "+notes.remove(array[i].getID()));
-			System.out.println("Still there?: "+notes.contains(array[i].getID()));
+			notes.remove(array[i].getID());
 			assertFalse(notes.contains(array[i].getID()));
 		}
-	}*/
+	}
 	
 	@Test
 	public void testToArrayEmpty() {
@@ -219,7 +212,7 @@ public class DictionarySortedListTest extends TestCase {
 		}
 	}
 	
-	/*@Test
+	@Test
 	public void testTime() {
 		long start, end;
 		double time;
@@ -250,6 +243,6 @@ public class DictionarySortedListTest extends TestCase {
 		System.out.println("---------------------------\n" + 
 							"Average Time for " + runs + " runs: " +
 							average / runs + " ms");
-	}*/
+	}
 
 }

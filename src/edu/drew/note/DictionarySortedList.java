@@ -42,7 +42,6 @@ public class DictionarySortedList implements NoteCollection {
 	}*/
 	
 	// Adds item to data structure in order of Note's ID 
-	// -- Not working for "many" cases
 	public boolean add(Note note) {
 		if(note != null) {
 			Node n = head;
@@ -65,10 +64,6 @@ public class DictionarySortedList implements NoteCollection {
 					n = n.next;
 				} 
 			}
-			Node t = new Node(note, n.next);
-			n.next = t;
-			numEntries++;
-			return true;
 		}
 		return false;
 	}
