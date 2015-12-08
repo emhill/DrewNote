@@ -9,13 +9,14 @@ public class DictionaryfromSA implements NoteCollection{
 
 	//Nate Tazewell Final project
 
-	private Note[] array;
-	private int numEntries = 0;
-	// Situational capacity #
-	private static final int DEFAULT_CAPACITY = 20;
+	
 
 	public DictionaryfromSA(int capacity) {
 		array = (Note[]) new Object[capacity];
+		private Note[] array;
+		private int numEntries = 0;
+		// Situational capacity #
+		private static final int DEFAULT_CAPACITY = 20;
 
 		//should return a boolean, and add the note into the sorted array while also placing it 
 		//in a position based on it's content
@@ -36,7 +37,7 @@ public class DictionaryfromSA implements NoteCollection{
 			for(int i=0; i < array.length; i++) {
 				if(ID == i) {
 					//should return the note that the ID pertains to
-					return Note;
+					return array[i];
 				}
 			}
 
@@ -69,7 +70,7 @@ public class DictionaryfromSA implements NoteCollection{
 					return true;
 				}
 			}
-			return false;
+	
 			return false;
 		}
 
@@ -87,9 +88,11 @@ public class DictionaryfromSA implements NoteCollection{
 		}
 
 		@Override
+		//returns 
 		public int getSize() {
-			// TODO Auto-generated method stub
-			return 0;
+			return numEntries;
+		// TODO Auto-generated method stub
+			
 		}
 
 		@Override
@@ -110,5 +113,6 @@ public class DictionaryfromSA implements NoteCollection{
 			return null;
 		}
 	}
+	
 
 
