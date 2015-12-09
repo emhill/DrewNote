@@ -113,7 +113,12 @@ public class SortedLinkedList<T> implements NoteCollection {
 		}
 		return false;
 	}
-
+	
+	/*@Override
+	public boolean contains(long ID) {
+		return lookup(ID) != null;
+	}*/
+	
 	@Override
 	public boolean contains(long ID) {
 		Node n = head;
@@ -125,7 +130,7 @@ public class SortedLinkedList<T> implements NoteCollection {
 		}
 		return false;
 	}
-
+	
 	@Override
 	public Note[] toArray() {
 		Note[] array = new Note[numEntries];
