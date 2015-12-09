@@ -1,7 +1,6 @@
-package edu.drew.note;
 //SortedLinkedList with Sequential Search by Thomas Cotroneo
 
-
+package edu.drew.note;
 
 public class SortedLinkedList<T> implements NoteCollection {
 	
