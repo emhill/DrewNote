@@ -1,6 +1,6 @@
 package edu.drew.note;
 
-public class ShellSort {
+public class ShellSort implements SortInterface{
 	public Note[] sort(Note[] s){
 		int space = s.length / 2;
 		while (space > 0) {
