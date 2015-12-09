@@ -11,7 +11,7 @@ import edu.drew.note.Note;
 import edu.drew.note.SelectionSort;
 
 public class JavaSortTest {
-	SelectionSort js = new SelectionSort();
+	JavaSort js = new JavaSort();
 	private static final int SIZE = 100;
 	private Note[] array = new Note[SIZE];
 
@@ -88,7 +88,9 @@ public class JavaSortTest {
 		}
 		Note[] unsorted = rev;
 		Note[] sorted   = array;
-		assertArrayEquals(sorted, js.sort(unsorted));
+		unsorted = js.sort(unsorted);
+		assertArrayEquals(sorted, unsorted);
+		
 	}
 
 	@Test

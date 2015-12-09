@@ -5,13 +5,11 @@ package edu.drew.note;
 public class SelectionSort implements SortInterface{
 
 	public Note[] sort(Note[] s) {
-		Note temp = null;
-		int tempIndex = 0;
 		for (int i = 0; i < s.length; i++) {
-			tempIndex = i;
-			temp = s[i];
+			int tempIndex = i;
+			Note temp = s[i];
 			for (int j = i+1; j < s.length; j++) {
-				if (s[j].getID()<s[i].getID() || s[j].getID()<temp.getID()) {
+				if (s[j].getID()<temp.getID()) {
 					temp = s[j];
 					tempIndex = j;
 				}
@@ -21,5 +19,4 @@ public class SelectionSort implements SortInterface{
 		}
 		return s;
 	}
-	
 }
