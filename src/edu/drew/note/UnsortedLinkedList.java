@@ -1,7 +1,6 @@
 package edu.drew.note;
 
 
-
 public class UnsortedLinkedList<T> implements NoteCollection {
 
 
@@ -28,7 +27,7 @@ public class UnsortedLinkedList<T> implements NoteCollection {
 				data = dataPortion;
 				next = nextNode;	
 			} // end constructor
-		} // Change T's to notes and print each notes!!
+		} 
 
 		
 		@Override
@@ -41,19 +40,56 @@ public class UnsortedLinkedList<T> implements NoteCollection {
 
 	@Override
 	public Note lookup(long ID) {
-		// TODO Auto-generated method stub
+		Node n = firstNote;
+		int i = 0;
+		while (n != null) { 
+			if (n.data.equals(ID)){
+				return n.data;
+			}
+			else
+				n = n.next;
+		}
+	
 		return null;
 	}
 
 	@Override
 	public boolean remove(long ID) {
-		// TODO Auto-generated method stub
+		Node n = firstNote;
+		Node prev = firstNote;
+		while (n != null) {
+			if (n.data.equals(ID)) {
+				// remove the node
+				if (prev == n) // only for the first case
+					firstNote = n.next;
+				else
+					prev.next = n.next; // all other cases
+				numberOfEntries--;
+				return true;
+			}
+			prev = n;
+			n = n.next;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean remove(Note note) {
-		
+		Node n = firstNote;
+		Node prev = firstNote;
+		while (n != null) {
+			if (n.data.equals(note)) {
+				// remove the node
+				if (prev == n) // only for the first case
+					firstNote = n.next;
+				else
+					prev.next = n.next; // all other cases
+				numberOfEntries--;
+				return true;
+			}
+			prev = n;
+			n = n.next;
+		}
 		return false;
 	}
 
@@ -68,27 +104,40 @@ public class UnsortedLinkedList<T> implements NoteCollection {
 
 	@Override
 	public int getSize() {
-		// TODO Auto-generated method stub
-		return 0;
+		return numberOfEntries;
+
 	}
 
 	@Override
 	public boolean contains(Note note) {
 		boolean found = false;
-//		Note currentNote = firstNote;
-//		
-//		while(!found && (currentNote != null)) {
-//			if (newEntry.equals(currentNote.data))
-//				found = true;
-//			else
-//				currentNote = currentNote.next;
-//		}
-		return found;
+		Node n = firstNote;
+		int i = 0;
+		while (n != null) { 
+			if (n.data.equals(note)){
+				return true;
+			}
+			else
+				n = n.next;
+		}
+	
+		return false;
 	}
 
 	@Override
 	public boolean contains(long ID) {
-		// TODO Auto-generated method stub
+		boolean found = false;
+		Node n = firstNote;
+		int i = 0;
+		while (n != null) { // could also be for i < numEntries
+			// do something -- copy
+			if (n.data.equals(ID)){
+				return true;
+			}
+			else
+				n = n.next;
+		}
+	
 		return false;
 	}
 
@@ -105,14 +154,20 @@ public class UnsortedLinkedList<T> implements NoteCollection {
 		}
 		return array;
 	}
-	public static void main(String[] args) {
-		UnsortedLinkedList<Note> LL = new UnsortedLinkedList<Note>();
-		LL.add(new Note());
-		LL.add(new Note());
-		Note[] array = LL.toArray();
-		for (int i = 0; i < array.length; i++){
-			System.out.println(array[i]);
-			
-		}
-	}
+//	public static void main(String[] args) {
+//		UnsortedLinkedList<Note> LL = new UnsortedLinkedList<Note>();
+//		LL.add(new Note());
+//		LL.add(new Note());
+//		Note n = new Note();
+////		System.out.println(LL.contains(n));
+//		LL.add(n);
+////		System.out.println(LL.contains(n));
+//		Note[] array = LL.toArray();
+//		LL.contains(new Note());
+//		System.out.println(LL.contains(2));
+//		for (int i = 0; i < array.length; i++){
+//			System.out.println(array[i]);
+//		
+//		}
+//	}
 }

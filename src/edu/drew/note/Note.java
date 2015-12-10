@@ -43,6 +43,10 @@ public class Note implements Comparable {
 		return tags;
 	}
 	
+	public Date getCreated() {
+		return created;
+	}
+	
 	public String toString() {
 		return  title + "\n" +
 				"----------------------\n" + 
