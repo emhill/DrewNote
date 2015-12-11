@@ -99,7 +99,7 @@ public class DictionarySortedListTest extends TestCase {
 			assertTrue(notes.contains(array[i]));
 			assertTrue(notes.contains(array[i].getID()));
 		}
-		System.out.println("HERE: "+notes.toString());
+		
 	}
 	
 	@Test
