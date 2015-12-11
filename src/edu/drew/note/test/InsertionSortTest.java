@@ -3,14 +3,16 @@ package edu.drew.note.test;
 import static org.junit.Assert.*;
 
 import java.util.Random;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.drew.note.InsertionSort;
 import edu.drew.note.JavaSort;
 import edu.drew.note.Note;
 
-public class JavaSortTest {
-	JavaSort js = new JavaSort();
+public class InsertionSortTest {
+	InsertionSort is = new InsertionSort();
 	private static final int SIZE = 100;
 	private Note[] array = new Note[SIZE];
 
@@ -41,7 +43,7 @@ public class JavaSortTest {
 	public void testSortEmpty() {
 		Note[] unsorted = {};
 		Note[] sorted   = {};
-		assertArrayEquals(sorted, js.sort(unsorted));
+		assertArrayEquals(sorted, is.sort(unsorted));
 	}
 
 	@Test
@@ -49,21 +51,21 @@ public class JavaSortTest {
 		Note n = new Note();
 		Note[] unsorted = {n};
 		Note[] sorted   = {n};
-		assertArrayEquals(sorted, js.sort(unsorted));
+		assertArrayEquals(sorted, is.sort(unsorted));
 	}
 
 	@Test
 	public void testSorted() {
 		Note[] unsorted = array.clone();
 		Note[] sorted   = array;
-		assertArrayEquals(sorted, js.sort(unsorted));
+		assertArrayEquals(sorted, is.sort(unsorted));
 	}
 
 	@Test
 	public void testUnsorted() {
 		Note[] unsorted = {array[25], array[13], array[45], array[4]};
 		Note[] sorted   = {array[4], array[13], array[25], array[45]};
-		assertArrayEquals(sorted, js.sort(unsorted));
+		assertArrayEquals(sorted, is.sort(unsorted));
 	}
 
 	@Test
@@ -74,7 +76,7 @@ public class JavaSortTest {
 		shuffleArray(shuffle);
 		Note[] unsorted = shuffle;
 		Note[] sorted   = array;
-		assertArrayEquals(sorted, js.sort(unsorted));
+		assertArrayEquals(sorted, is.sort(unsorted));
 	}
 
 	@Test
@@ -87,9 +89,9 @@ public class JavaSortTest {
 		}
 		Note[] unsorted = rev;
 		Note[] sorted   = array;
-		assertArrayEquals(sorted, js.sort(unsorted));
+		unsorted = is.sort(unsorted);
+		assertArrayEquals(sorted, unsorted);
 	}
-
 	@Test
 	public void testTime() {
 		long start, end;
@@ -101,7 +103,7 @@ public class JavaSortTest {
 		for (int i = 0; i < runs; i++) {
 			shuffleArray(shuffle);
 			start = System.nanoTime();
-			js.sort(shuffle);
+			is.sort(shuffle);
 			end = System.nanoTime();
 			time = (end - start) / 1000000d;
 			System.out.println(time + "ms ");
