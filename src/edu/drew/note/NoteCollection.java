@@ -1,6 +1,6 @@
 package edu.drew.note;
 
-public interface NoteCollection {
+public interface NoteCollection<T> {
 
 	//Adds new entry to the collection.
 	public boolean add(Note newNote);
