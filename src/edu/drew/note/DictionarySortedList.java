@@ -22,7 +22,10 @@ public class DictionarySortedList implements NoteCollection {
 			
 			while(n!=null) {
 				long curNodeID = n.note.getID();
-				if (curNodeID <= note.getID()) {
+				if (curNodeID == note.getID()) {
+					n = n.next;
+				}
+				else if (curNodeID < note.getID()) {
 					Node q = new Node(note, n.next);
 					n.next = q;
 					numEntries++;
