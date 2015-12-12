@@ -86,7 +86,9 @@ public class DictionarySortedListTest extends TestCase {
 		for (int i = 0; i < size; i++) {
 			assertTrue(notes.contains(array[i].getID()));
 			assertTrue(notes.contains(array[i]));
+			
 		}
+		System.out.println(notes.toString());
 	}
 	
 	@Test
@@ -99,7 +101,6 @@ public class DictionarySortedListTest extends TestCase {
 			assertTrue(notes.contains(array[i]));
 			assertTrue(notes.contains(array[i].getID()));
 		}
-		System.out.println("HERE: "+notes.toString());
 	}
 	
 	@Test
