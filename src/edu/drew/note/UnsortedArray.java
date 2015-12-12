@@ -90,10 +90,11 @@ public boolean isEmpty() {
 public boolean contains(Note note) {
 	// TODO Auto-generated method stub
 	boolean found = false;
-	
-	for(int i = 0; i < s.length; i++){
+	int i =0;
+	while(!found && (i <numEntries)){
 		if(note.equals(s[i])){
 			found = true;
+			i++;
 			
 		}
 	}
