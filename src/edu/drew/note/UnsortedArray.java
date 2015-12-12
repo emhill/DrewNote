@@ -91,7 +91,7 @@ public boolean contains(Note note) {
 	// TODO Auto-generated method stub
 	boolean found = false;
 	int i =0;
-	while(!found && (i <numEntries)){
+	while(!found && (i <s.length)){
 		if(note.equals(s[i])){
 			found = true;
 			i++;
