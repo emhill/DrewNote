@@ -1,5 +1,6 @@
 package edu.drew.note;
-
+//Author: Thalia Santacruz
+//Using an unsorted linked list to sequentially search
 
 public class UnsortedLinkedList<T> implements NoteCollection {
 
@@ -32,10 +33,14 @@ public class UnsortedLinkedList<T> implements NoteCollection {
 		
 		@Override
 		public boolean add(Note newNote) {
-			
+			if (newNote != null){
 			firstNote = new Node(newNote, firstNote);
 			numberOfEntries++;
 			return true;
+			}
+			else {
+				return false;
+			}
 		}
 
 	@Override
