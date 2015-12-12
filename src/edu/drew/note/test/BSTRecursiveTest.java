@@ -1,17 +1,15 @@
 package edu.drew.note.test;
 
-import static org.junit.Assert.*;
-import junit.framework.TestCase;
-
 import org.junit.Test;
 
-import edu.drew.note.ArrayListCollection;
+import edu.drew.note.BinaryTreeRecursive;
 import edu.drew.note.Note;
+import junit.framework.TestCase;
 
-public class ArrayListCollectionTest extends TestCase {
+public class BSTRecursiveTest extends TestCase  {
 	private static final int SIZE = 100;
 	private Note[] array = new Note[SIZE];
-	private ArrayListCollection notes = new ArrayListCollection();
+	private BinaryTreeRecursive notes = new BinaryTreeRecursive();
 	
 	@Override
 	protected void setUp() {
@@ -21,14 +19,14 @@ public class ArrayListCollectionTest extends TestCase {
 	}
 
 	private Note addOneElement() {
-		notes = new ArrayListCollection();
+		notes = new BinaryTreeRecursive();
 		Note n = new Note();
 		notes.add(n);
 		return n;
 	}
 	
 	private int addManyElements() {
-		notes = new ArrayListCollection();
+		notes = new BinaryTreeRecursive();
 		for (int i = 0; i < SIZE; i++)
 			notes.add(array[i]);
 		return SIZE;
@@ -44,20 +42,20 @@ public class ArrayListCollectionTest extends TestCase {
 	
 	@Test
 	public void testIsEmpty() {
-		notes = new ArrayListCollection();
+		notes = new BinaryTreeRecursive();
 		assertTrue(notes.isEmpty());
 	}
 	
 	@Test
 	public void testIsNotEmpty() {
-		notes = new ArrayListCollection();
+		notes = new BinaryTreeRecursive();
 		notes.add(new Note());
 		assertFalse(notes.isEmpty());
 	}
 	
 	@Test
 	public void testSizeOne() {
-		notes = new ArrayListCollection();
+		notes = new BinaryTreeRecursive();
 		notes.add(new Note());
 		assertEquals(1, notes.getSize());
 	}
@@ -117,7 +115,7 @@ public class ArrayListCollectionTest extends TestCase {
 	
 	@Test
 	public void testRemoveEmpty() {
-		notes = new ArrayListCollection();
+		notes = new BinaryTreeRecursive();
 		Note n = new Note();
 		// below should throw no exceptions!
 		notes.remove(n.getID()); 
@@ -145,7 +143,7 @@ public class ArrayListCollectionTest extends TestCase {
 	
 	@Test
 	public void testToArrayEmpty() {
-		notes = new ArrayListCollection();
+		notes = new BinaryTreeRecursive();
 		Note[] a = notes.toArray();
 		assertEquals(0, a.length);
 	}

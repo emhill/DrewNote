@@ -1,3 +1,4 @@
+
 package edu.drew.note;
 
 public class NoteDictionary implements NoteCollection{

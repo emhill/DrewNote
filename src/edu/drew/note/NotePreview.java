@@ -10,11 +10,11 @@ public class NotePreview {
 	 JButton createNewNote, deleteNote, search;
 	 final JTextField userText = new JTextField(6);
 	
-	public NoteBar() {
+	public NotePreview() {
 		
 	}
 	
-	public NoteBar(Note newNote) {
+	public NotePreview(Note newNote) {
 		
 	}
 
