@@ -1,3 +1,4 @@
+
 package edu.drew.note;
 
 public class NoteDictionary implements NoteCollection{
@@ -7,6 +8,9 @@ public class NoteDictionary implements NoteCollection{
 	
 	// Adds item to data structure
 	public boolean add(Note note) {
+		if (note == null) {
+			return false;
+		}
 		head = new Node(note.getID(), note, head);
 		numEntries++; // Update number of notes
 		return true; // Node added
