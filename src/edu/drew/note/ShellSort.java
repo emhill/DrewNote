@@ -23,3 +23,5 @@ public class ShellSort implements SortInterface{
 		return s;
 	}
 }
+// Works Cited:
+// Code implemented with assistance from http://rosettacode.org/wiki/Sorting_algorithms/Shell_sort#Java
