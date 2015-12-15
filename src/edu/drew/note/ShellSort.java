@@ -24,4 +24,8 @@ public class ShellSort implements SortInterface{
 	}
 }
 // Works Cited:
+<<<<<<< HEAD
 // Code implemented with assistance from http://rosettacode.org/wiki/Sorting_algorithms/Shell_sort#Java
+=======
+// Code implemented with assistance from: http://rosettacode.org/wiki/Sorting_algorithms/Shell_sort#Java
+>>>>>>> 7ad318ee035c8ce1f36c08d6a43e3ba6fb07b239
