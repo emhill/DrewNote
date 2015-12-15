@@ -1,20 +1,14 @@
 package edu.drew.note.test;
 
 import static org.junit.Assert.*;
-<<<<<<< HEAD
-import edu.drew.note.ShellSort;
-=======
 
->>>>>>> 7ad318ee035c8ce1f36c08d6a43e3ba6fb07b239
 import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.drew.note.JavaSort;
 import edu.drew.note.Note;
-<<<<<<< HEAD
-=======
 import edu.drew.note.ShellSort;
->>>>>>> 7ad318ee035c8ce1f36c08d6a43e3ba6fb07b239
 
 public class ShellSortTest {
 	ShellSort js = new ShellSort();
@@ -119,8 +113,4 @@ public class ShellSortTest {
 				average / runs + " ms");
 	}
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 7ad318ee035c8ce1f36c08d6a43e3ba6fb07b239
