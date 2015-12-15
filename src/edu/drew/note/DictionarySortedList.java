@@ -3,11 +3,48 @@ package edu.drew.note;
 import java.util.Date;
 
 // Implementation of a sorted note dictionary create my Chris Thurber
-
 public class DictionarySortedList implements NoteCollection {
 
 	private Node head;
 	private int numEntries = 0;
+	
+	// Adds item to data structure in order of Note's ID 
+	public boolean add(Note note) {
+		if(note != null) {
+			Node n = head;
+			
+			if(n == null) {
+				head = new Node(note,head);
+				numEntries++;
+				return true;
+			}
+			
+			while(n!=null) {
+				long curNodeID = n.note.getID();
+				if (curNodeID <= note.getID()) {
+					Node q = new Node(note, n.next);
+					n.next = q;
+					numEntries++;
+					return true;
+				}
+				else if(curNodeID > note.getID()) {
+					n = n.next;
+				}
+			}
+			
+		}
+		return false;
+	}
+	
+	// Adds item to data structure
+	/*public boolean add(Note note) {
+		if (note != null) {
+			head = new Node(note, head);
+			numEntries++;
+			return true; // Node added
+		}
+		return false;
+	}*/
 	
 	// Adds item to data structure based on its creation date
 	// -- Not working for "many" cases
@@ -37,43 +74,6 @@ public class DictionarySortedList implements NoteCollection {
 					return true;
 				}
 			}
-		}
-		return false;
-	}*/
-	
-	// Adds item to data structure in order of Note's ID 
-	public boolean add(Note note) {
-		if(note != null) {
-			Node n = head;
-			
-			if(n == null) {
-				head = new Node(note,head);
-				numEntries++;
-				return true;
-			}
-			
-			while(n!=null) {
-				long curNodeID = n.note.getID();
-				if (curNodeID == n.note.getID()) {
-					Node q = new Node(note, n.next);
-					n.next = q;
-					numEntries++;
-					return true;
-				}
-				else if(curNodeID > note.getID()) {
-					n = n.next;
-				} 
-			}
-		}
-		return false;
-	}
-	
-	// Adds item to data structure
-	/*public boolean add(Note note) {
-		if (note != null) {
-			head = new Node(note, head);
-			numEntries++;
-			return true; // Node added
 		}
 		return false;
 	}*/

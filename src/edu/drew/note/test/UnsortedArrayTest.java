@@ -1,42 +1,48 @@
 package edu.drew.note.test;
 
 import static org.junit.Assert.*;
+
+
 import junit.framework.TestCase;
 import java.util.Random;
-import org.junit.Test;
-import edu.drew.note.DictionarySortedList;
-import edu.drew.note.Note;
 
-public class DictionarySortedListTest extends TestCase {
+import org.junit.Test;
+
+
+import edu.drew.note.Note;
+import edu.drew.note.UnsortedArray;
+
+public class UnsortedArrayTest {
 	private static final int SIZE = 100;
 	private Note[] array = new Note[SIZE];
-	private Note[] shuffled=new Note[SIZE];
-	private DictionarySortedList notes = new DictionarySortedList();
+
+	private UnsortedArray notes = new UnsortedArray(10);
 	
-	@Override
+
+	private Note[]shuffled=new Note[SIZE];
+	
 	protected void setUp() {
 		array = new Note[SIZE];
 		for (int i = 0; i < SIZE; i++){
-			array[i] = new Note("HELLO","It's me, Adelle");
+			array[i] = new Note();
 			shuffled[i]=array[i];
 		}
 		shuffleArray(shuffled);
 	}
 
 	private Note addOneElement() {
-		notes = new DictionarySortedList();
+		notes = new UnsortedArray(100);
 		Note n = new Note();
 		notes.add(n);
 		return n;
 	}
 	
 	private int addManyElements() {
-		notes = new DictionarySortedList();
+		notes = new UnsortedArray(100);
 		for (int i = 0; i < SIZE; i++)
 			notes.add(array[i]);
 		return SIZE;
 	}
-	
 	@Test
 	public void testAddNullElement() {
 		int n = notes.getSize();
@@ -47,24 +53,23 @@ public class DictionarySortedListTest extends TestCase {
 	
 	@Test
 	public void testIsEmpty() {
-		notes = new DictionarySortedList();
+		notes = new UnsortedArray(100);
 		assertTrue(notes.isEmpty());
 	}
 	
 	@Test
 	public void testIsNotEmpty() {
-		notes = new DictionarySortedList();
+		notes = new UnsortedArray(100);
 		notes.add(new Note());
 		assertFalse(notes.isEmpty());
 	}
 	
 	@Test
 	public void testSizeOne() {
-		notes = new DictionarySortedList();
+		notes = new UnsortedArray(100);
 		notes.add(new Note());
 		assertEquals(1, notes.getSize());
 	}
-	
 	@Test
 	public void testSizeMany() {
 		int size = addManyElements();
@@ -80,31 +85,23 @@ public class DictionarySortedListTest extends TestCase {
 	
 	@Test
 	public void testAddMany() {
-		notes.clear();
 		int size = addManyElements();
 		assertEquals(size, notes.getSize());
 		for (int i = 0; i < size; i++) {
+			assertTrue(notes.contains(array[i]));
 			assertTrue(notes.contains(array[i].getID()));
-			assertTrue(notes.contains(array[i]));	
 		}
 	}
 	
 	@Test
 	public void testAddManyShuffled() {
-		notes = new DictionarySortedList();
-		for (int i = 0; i < SIZE; i++) {
-			System.out.println("ID: "+shuffled[i].getID());
-			System.out.println("Added?: "+notes.add(shuffled[i]));
-		}
-		System.out.println("SIZE: "+SIZE);
-		System.out.println("getSize(): "+ notes.getSize());
+		notes = new UnsortedArray(30);
+		for (int i = 0; i < SIZE; i++)
+			notes.add(shuffled[i]);
 		assertEquals(SIZE, notes.getSize());
 		for (int i = 0; i < SIZE; i++) {
-			//assertTrue(notes.contains(array[i]));
-			//assertTrue(notes.contains(array[i].getID()));
-			
-			System.out.println("Contains Obj: "+notes.contains(array[i]));
-			System.out.println("Contains ID: "+ notes.contains(array[i].getID()));
+			assertTrue(notes.contains(array[i]));
+			assertTrue(notes.contains(array[i].getID()));
 		}
 	}
 	
@@ -114,7 +111,6 @@ public class DictionarySortedListTest extends TestCase {
 		assertEquals(n, notes.lookup(n.getID()));
 		assertTrue(notes.contains(n));
 	}
-	
 	@Test
 	public void testLookupMany() {
 		int size = addManyElements();
@@ -123,29 +119,20 @@ public class DictionarySortedListTest extends TestCase {
 			assertEquals(array[i], notes.lookup(array[i].getID()));
 		}
 	}
-	
 	@Test
 	public void testRemoveOneNote() {
 		Note n = addOneElement();
 		notes.remove(n);
 		assertFalse(notes.contains(n));
 	}
-	
-	@Test
-	public void testRemoveOneNoteByID() {
-		Note n = addOneElement();
-		notes.remove(n.getID());
-		assertFalse(notes.contains(n.getID()));
-	}
-	
 	@Test
 	public void testRemoveEmpty() {
-		notes = new DictionarySortedList();
+		notes = new UnsortedArray(100);
 		Note n = new Note();
 		// below should throw no exceptions!
-		notes.remove(null);
-		notes.remove(n);
 		notes.remove(n.getID()); 
+		notes.remove(n);
+		notes.remove(null);
 	}
 	
 	@Test
@@ -168,7 +155,7 @@ public class DictionarySortedListTest extends TestCase {
 	
 	@Test
 	public void testRemoveManyShuffledNotesByID() {
-		notes = new DictionarySortedList();
+		notes = new UnsortedArray(20);
 		for (int i = 0; i < SIZE; i++)
 			notes.add(shuffled[i]);
 		assertEquals(SIZE, notes.getSize());
@@ -180,11 +167,10 @@ public class DictionarySortedListTest extends TestCase {
 	
 	@Test
 	public void testToArrayEmpty() {
-		notes = new DictionarySortedList();
+		notes = new UnsortedArray(100);
 		Note[] a = notes.toArray();
 		assertEquals(0, a.length);
 	}
-	
 	@Test
 	public void testToArrayOne() {
 		Note n = addOneElement();
@@ -235,7 +221,7 @@ public class DictionarySortedListTest extends TestCase {
 			shuffleArray(shuffle);
 			start = System.nanoTime();
 			// begin test
-			notes = new DictionarySortedList();
+			notes = new UnsortedArray(20);
 			for (int i = 0; i < shuffle.length; i++)
 				notes.add(shuffle[i]);
 			for (int i = 0; i < shuffle.length; i++)
