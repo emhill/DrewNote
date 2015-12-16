@@ -63,10 +63,9 @@ public class UnsortedLinkedList<T> implements NoteCollection {
 	@Override
 	public Note lookup(long ID) {
 		Node n = firstNote;
-//		int i = 0;
 		while (n != null) { 
-			if (n.data.equals(ID)){
-				return n.data;
+			if (n.data.getID()==ID){
+				return n.data;			
 			}
 			else
 				n = n.next;
@@ -80,7 +79,7 @@ public class UnsortedLinkedList<T> implements NoteCollection {
 		Node n = firstNote;
 		Node prev = firstNote;
 		while (n != null) {
-			if (n.data.equals(ID)) {
+			if (n.data.getID()==ID) {
 				// remove the node
 				if (prev == n) // only for the first case
 					firstNote = n.next;
@@ -151,7 +150,7 @@ public class UnsortedLinkedList<T> implements NoteCollection {
 		int i = 0;
 		while (n != null) { // could also be for i < numEntries
 			// do something -- copy
-			if (n.data.equals(ID)){
+			if (n.data.getID()==ID){
 				return true;
 			}
 			else
