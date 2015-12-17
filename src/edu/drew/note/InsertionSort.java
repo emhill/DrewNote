@@ -15,7 +15,7 @@ public class InsertionSort implements SortInterface { //find least # & bring to 
 		}
 		return s;
 	}
-
+//testing
 	public static void main(String[] args) {
 		Note a = new Note(); 
 		Note b = new Note(); 
