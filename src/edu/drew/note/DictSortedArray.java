@@ -2,8 +2,10 @@ package edu.drew.note;
 
 import java.util.Arrays;
 
-public class DictionaryfromSA implements NoteCollection{
-
+public class DictSortedArray implements NoteCollection{
+	private Note[] array;
+	private int numEntries = 0;
+	private static final int DEFAULT_CAPACITY = 20;
 
 
 
@@ -11,12 +13,11 @@ public class DictionaryfromSA implements NoteCollection{
 
 
 
-	public DictionaryfromSA(int capacity) {
+	public DictSortedArray(int capacity) {
 		array = (Note[]) new Object[capacity];
-		private Note[] array;
-		private int numEntries = 0;
+	
 		// Situational capacity #
-		private static final int DEFAULT_CAPACITY = 20;
+	}
 
 		//should return a boolean, and add the note into the sorted array while also placing it 
 		//in a position based on it's content
@@ -44,8 +45,10 @@ public class DictionaryfromSA implements NoteCollection{
 					//should return the note that the ID pertains to
 					return array[i];
 				}
+				
 
 			}
+			return null;
 
 		}
 
@@ -65,7 +68,7 @@ public class DictionaryfromSA implements NoteCollection{
 			}
 			return false;
 
-			return false;
+			
 		}
 
 
@@ -93,6 +96,7 @@ public class DictionaryfromSA implements NoteCollection{
 			if( numEntries == 0) {
 				return true;
 			}
+			return false;
 		}
 
 
@@ -120,7 +124,8 @@ public class DictionaryfromSA implements NoteCollection{
 				if (array[i].equals(note)) {
 					return true;
 				}
-			}	
+			}
+			return false;	
 
 		}
 
@@ -135,13 +140,13 @@ public class DictionaryfromSA implements NoteCollection{
 				}
 
 			}
+			return false;
 
 		}
 //sets everything in an array
 		@Override
 		public Note[] toArray() {
 			return Arrays.copyOf(array, numEntries);
-			return null;
 		}
 	}
 
