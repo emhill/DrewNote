@@ -1,50 +1,71 @@
 package edu.drew.note;
 
+import edu.drew.note.Note;
+//Author: Thalia Santacruz
+//Using an unsorted linked list to sequentially search
 
 public class UnsortedLinkedList<T> implements NoteCollection {
 
 
+		private Node firstNote = null;
+		private int numberOfEntries = 0;
 		
-		public Node firstNote;
-		public int numberOfEntries;
-		
-		public UnsortedLinkedList() {
-			numberOfEntries = 0;
-			firstNote = null;
-		}
+//		public UnsortedLinkedList() {
+//			numberOfEntries = 0;
+//			firstNote = null;
+//		}
 		private class Node 
 		{
 		  private Note    data; // Entry in bag
-		  private Node next; // Link to next node
+		  private Node next = null; // Link to next node
 
-			private Node(Note dataPortion)
+			private Node(Note n, Node d)
 			{
-				this(dataPortion, null);	
-			} // end constructor
-			
-			private Node(Note dataPortion, Node nextNode)
-			{
-				data = dataPortion;
-				next = nextNode;	
+				data = n;
+				next = d;
 			} // end constructor
 		} 
 
 		
 		@Override
 		public boolean add(Note newNote) {
-			
-			firstNote = new Node(newNote, firstNote);
-			numberOfEntries++;
-			return true;
-		}
+			if (newNote != null) {
+				Node n = firstNote;
+				if (n == null) {
+					firstNote = new Node(newNote, firstNote);
+					numberOfEntries++;
+					return true;
+				}
+				while (n != null) {
+					long ID = n.data.getID();
+					if (ID == n.data.getID()) {
+						Node newNode = new Node(newNote, n.next);
+						n.next = newNode;
+						numberOfEntries++;
+						return true;
+					}
+					else
+						n = n.next;
+				}
+			}
+				return false;
+			}
+//			if (newNote != null){
+//			firstNote = new Node(newNote, firstNote);
+//			numberOfEntries++;
+//			return true;
+//			}
+//			else {
+//				return false;
+//			}
+//		}
 
 	@Override
 	public Note lookup(long ID) {
 		Node n = firstNote;
-		int i = 0;
 		while (n != null) { 
-			if (n.data.equals(ID)){
-				return n.data;
+			if (n.data.getID()==ID){
+				return n.data;			
 			}
 			else
 				n = n.next;
@@ -58,7 +79,7 @@ public class UnsortedLinkedList<T> implements NoteCollection {
 		Node n = firstNote;
 		Node prev = firstNote;
 		while (n != null) {
-			if (n.data.equals(ID)) {
+			if (n.data.getID()==ID) {
 				// remove the node
 				if (prev == n) // only for the first case
 					firstNote = n.next;
@@ -104,21 +125,12 @@ public class UnsortedLinkedList<T> implements NoteCollection {
 
 	@Override
 	public int getSize() {
-		Node n = firstNote;
-		int i = 0;
-		while (n != null) { 
-			// do something 
-			if (n.data.equals(n)) {
-				i++;
-			}
-			n = n.next;
-		}
-		return i; 
+		return numberOfEntries;
+
 	}
 
 	@Override
 	public boolean contains(Note note) {
-		boolean found = false;
 		Node n = firstNote;
 		int i = 0;
 		while (n != null) { 
@@ -134,12 +146,11 @@ public class UnsortedLinkedList<T> implements NoteCollection {
 
 	@Override
 	public boolean contains(long ID) {
-		boolean found = false;
 		Node n = firstNote;
 		int i = 0;
 		while (n != null) { // could also be for i < numEntries
 			// do something -- copy
-			if (n.data.equals(ID)){
+			if (n.data.getID()==ID){
 				return true;
 			}
 			else

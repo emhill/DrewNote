@@ -85,21 +85,28 @@ public class DictionarySortedListTest extends TestCase {
 		assertEquals(size, notes.getSize());
 		for (int i = 0; i < size; i++) {
 			assertTrue(notes.contains(array[i].getID()));
-			assertTrue(notes.contains(array[i]));
+			assertTrue(notes.contains(array[i]));	
 		}
 	}
 	
-	/*@Test
+	@Test
 	public void testAddManyShuffled() {
 		notes = new DictionarySortedList();
-		for (int i = 0; i < SIZE; i++)
-			notes.add(shuffled[i]);
+		for (int i = 0; i < SIZE; i++) {
+			System.out.println("ID: "+shuffled[i].getID());
+			System.out.println("Added?: "+notes.add(shuffled[i]));
+		}
+		System.out.println("SIZE: "+SIZE);
+		System.out.println("getSize(): "+ notes.getSize());
 		assertEquals(SIZE, notes.getSize());
 		for (int i = 0; i < SIZE; i++) {
-			assertTrue(notes.contains(array[i]));
-			assertTrue(notes.contains(array[i].getID()));
+			//assertTrue(notes.contains(array[i]));
+			//assertTrue(notes.contains(array[i].getID()));
+			
+			System.out.println("Contains Obj: "+notes.contains(array[i]));
+			System.out.println("Contains ID: "+ notes.contains(array[i].getID()));
 		}
-	}*/
+	}
 	
 	@Test
 	public void testLookupOne() {
@@ -159,20 +166,17 @@ public class DictionarySortedListTest extends TestCase {
 		}
 	}
 	
-	/*@Test
+	@Test
 	public void testRemoveManyShuffledNotesByID() {
 		notes = new DictionarySortedList();
 		for (int i = 0; i < SIZE; i++)
 			notes.add(shuffled[i]);
 		assertEquals(SIZE, notes.getSize());
 		for (int i = 0; i < SIZE; i++) {
-			//notes.remove(array[i].getID());
-			System.out.println("numEntries: "+notes.getSize()+" vs. ArrayLen: "+SIZE);
-			System.out.println("Removed "+array[i].getID()+": "+notes.remove(array[i].getID()));
-			System.out.println("Still there?: "+notes.contains(array[i].getID()));
+			notes.remove(array[i].getID());
 			assertFalse(notes.contains(array[i].getID()));
 		}
-	}*/
+	}
 	
 	@Test
 	public void testToArrayEmpty() {
@@ -214,7 +218,7 @@ public class DictionarySortedListTest extends TestCase {
 		}
 	}
 	
-	/*@Test
+	@Test
 	public void testTime() {
 		long start, end;
 		double time;
@@ -245,6 +249,6 @@ public class DictionarySortedListTest extends TestCase {
 		System.out.println("---------------------------\n" + 
 							"Average Time for " + runs + " runs: " +
 							average / runs + " ms");
-	}*/
+	}
 
 }

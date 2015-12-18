@@ -114,10 +114,8 @@ private class Node{
 	
 	//removes all notes from dictionary
 	public void clear(){
-		while(!isEmpty()){
-			firstNode=firstNode.next;
-			numEntries--;
-		}
+			firstNode=null;
+			numEntries=0;
 	}
 	
 	//searches for a note in the dictionary by its id
