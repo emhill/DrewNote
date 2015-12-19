@@ -128,5 +128,3 @@ public Note[] toArray() {
 	//Note [] a = nc.toArray();
 	//System.out.println("Enter a note");
 }
-	
-
