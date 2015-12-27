@@ -1,81 +1,83 @@
 package edu.drew.note;
 
-// The is My working program
-public class AVLTree implements NoteCollection{
+// Vishnuvardhan Allampalli - AVL TREE Implementation - CSCI 230
 
-    private static class Node {
+public class AVLTree implements NoteCollection{ 
+
+    private static class Node { //creating Node class variables
         Node left, right;
         Node parent;
         Note note;
         int height = 0;
 
-        public Node(Note note, Node parent) {
+        public Node(Note note, Node parent) {//Node Constructor
             this.note = note;
             this.parent = parent;
         }
         
-        private Note getContent() {
+        private Note getContent() {//method to get the note from the node
 			return this.note;
 		}
         
-        void setLeftChild(Node child) {
-            if (child != null) {
+        void setLeftChild(Node child) { 
+            if (child != null) {	//checking if child is not null
                 child.parent = this;
             }         
             this.left = child;
         }
 
         void setRightChild(Node child) {
-            if (child != null) {
+            if (child != null) { //checking if child is not null
                 child.parent = this;
             }
             this.right = child;
         }
     }
 
-    private Node root = null;
+    private Node root = null; //initializing the root node
     
-    public boolean add(Note data) {
-    	if (data == null) {
+    @Override
+    public boolean add(Note data) { //method to ass a note to the tree
+    	if (data == null) { //checks if the note is not null
         	return false;
         }
-    	insert(root, data);
+    	insert(root, data); //calls the insert method to do the adding to the tree
         return true;
     }
 
-    private int height(Node node) {
+    private int height(Node node) { //method that checks the height (node to root distance) of any given node
         return node == null ? -1 : node.height;
     }
 
-    private void insert(Node node, Note note) {
-        if (root == null) {
-            root = new Node(note, null);
+    private void insert(Node node, Note note) { // method that inserts the note in the tree
+        if (root == null) { //ensures root is not null, if null the the newly inserted note is placed as a new root Node.
+            root = new Node(note, null); //creates a new root node
             return;
         }
-        if (note.getID() < node.note.getID()) {
-            if (node.left != null) {
-                insert(node.left, note);
+        if (note.getID() < node.note.getID()) { // if ID of note is less than the ID of the Node in the function parameter
+            if (node.left != null) { //checks if left node is null
+                insert(node.left, note); //recursive insert call on left Node of the Node in the function parameter
             } 
             else {
-                node.left = new Node(note, node);
+                node.left = new Node(note, node); //if left node is null then a new node is inserted there
             }
-            rebalanceTreeRotRight(node, note);
+            rebalanceTreeRotRight(node, note);  //tree is balanced after each left insertion by rotating right
         }
-        else if (note.getID() > node.note.getID()) {
-            if (node.right != null) {
-                insert(node.right, note);
+        else if (note.getID() > node.note.getID()) { // if ID of note is greater than the ID of the Node in the function parameter
+            if (node.right != null) {  //checks if right node is null
+                insert(node.right, note); //recursive insert call on right Node of the Node in the function parameter
             } 
             else {
-                node.right = new Node(note, node);
+                node.right = new Node(note, node); //if right node is null then a new node is inserted there
             }
-            rebalanceTreeRotLeft(node, note);
+            rebalanceTreeRotLeft(node, note); //tree is balanced after each right insertion by rotating left
         }
-        reHeight(node);
+        reHeight(node); //height is calculated for the newly inserted node
     }
     
     
 	@Override
-	public Note lookup(long ID) {
+	public Note lookup(long ID) { // method that retrieves the note of a given ID
 		Node temp = search(ID);
 			return temp.note;
 	}	
@@ -139,6 +141,7 @@ public class AVLTree implements NoteCollection{
         return target;
     }
 	
+    @Override
 	public boolean isEmpty() {
 		if (root == null){
 			return true;
@@ -146,7 +149,8 @@ public class AVLTree implements NoteCollection{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+    
+    @Override
 	public int getSize() {
 	  return(size(root)); 
 	}
@@ -163,7 +167,7 @@ public class AVLTree implements NoteCollection{
 	  } 
 	}
 	
-	
+	@Override
 	public boolean contains(Note note) {
 		long noteId = note.getID();
 		if (search(noteId) != null){
@@ -172,6 +176,7 @@ public class AVLTree implements NoteCollection{
 		return false;
 	}
 	
+	@Override
 	public boolean contains(long ID) {
 		if (search(ID) != null){
 			return true;
