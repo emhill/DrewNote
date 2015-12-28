@@ -83,82 +83,78 @@ public class AVLTree implements NoteCollection{
 	}	
 		
 	@Override
-    public boolean remove(long ID) {
+    public boolean remove(long ID) { //removes not by given ID
 		Node target = search(ID); //retrieving the node of the ID
 		if (target != null) { // Checking if null is being passed
 			target = deleteNode(target); //calling delete to delete the node
 		       balanceTree(target.parent); // balancing tree after delete operation
-		       return true;
+		       return true; //true if removal is success
 		}
-        return false;
+        return false; //false if removal is failure
     }
 	
 	@Override
-	public boolean remove(Note note) {
+	public boolean remove(Note note) { //removes note by given note
 			boolean remover=false;
 			if (note == null) {
-				remover = false;
+				remover = false; //false if removal is failure due to note being null
 			}
 			else if(!contains(note)){
-				remover=false;
+				remover=false; //false if removal is failure due to note not found in tree
 			}
 			else if(isEmpty()||note==null) {
-				remover=false;
+				remover=false; //false if removal is failure due to tree being empty
 			}
 			else {
-				long id = note.getID();
-				Node remove=search(id);
-				deleteNode(remove);
+				long id = note.getID(); 
+				Node remove=search(id); //retrieving the node of the ID
+				deleteNode(remove); //calling delete to delete the node
 			}
 			return remover;
 	}
 
-    private Node deleteNode(Node target) {
+    private Node deleteNode(Node target) {//method that actually deletes the node
         if (target.parent == null) {
         	root = null;
-        	return target;
+        	return target;  //deletes root node if the node to be deleted is root node.
         }
-    	else if (isLeaf(target) && target.parent != null) { //leaf - 
+    	else if (isLeaf(target) && target.parent != null) { //deletes leaf node
             if (isLeftChild(target)) {
                 target.parent.left = null;
             } else {
                 target.parent.right = null;
             }
         } else if ((target.left == null && target.right != null) || 
-        		   (target.left != null && target.right == null)) { //exact 1 child
+        		   (target.left != null && target.right == null)) { //for exact 1 child
             Node nonNullChild = target.left == null ? target.right : target.left; 
             if (isLeftChild(target)) {
                 target.parent.setLeftChild(nonNullChild); 
             } else {
                 target.parent.setRightChild(nonNullChild);
             }
-        } else {//2 children
+        } else {//for 2 children
             Node immediatePredInOrder = immediatePredInOrder(target);
             target.note = immediatePredInOrder.note;
             target = deleteNode(immediatePredInOrder);
         }
-        reHeight(target.parent);
+        reHeight(target.parent);//calculate height of parent after the delete operation on the given node
         return target;
     }
 	
     @Override
-	public boolean isEmpty() {
+	public boolean isEmpty() { // method returns if the tree is empty
 		if (root == null){
 			return true;
 		}
-		// TODO Auto-generated method stub
 		return false;
 	}
     
     @Override
-	public int getSize() {
+	public int getSize() { //gets the tree size from root (the levels in the tree)
 	  return(size(root)); 
 	}
 	
-	/**
-	* Gets the size of the given branch
-	*/
-	private int size(Node node) { 
+	private int size(Node node) { //Gets the size of the given branch
 	  if (node == null) {
 		  return(0); 
 	  }
@@ -168,17 +164,17 @@ public class AVLTree implements NoteCollection{
 	}
 	
 	@Override
-	public boolean contains(Note note) {
-		long noteId = note.getID();
-		if (search(noteId) != null){
+	public boolean contains(Note note) { // method that tells if a given note exists in the tree
+		long noteId = note.getID(); //retrieves the ID of the given note
+		if (search(noteId) != null){ //calls the search method with the ID of the given note
 			return true;
 		}
 		return false;
 	}
 	
 	@Override
-	public boolean contains(long ID) {
-		if (search(ID) != null){
+	public boolean contains(long ID) { //method that tells if a given ID exists in the tree
+		if (search(ID) != null){ //calls the search method with the given ID
 			return true;
 		}
 		return false;
@@ -199,11 +195,11 @@ public class AVLTree implements NoteCollection{
 	
 //////////////////////////////Private Methods to Search, Balance, Traverse////////////////////////////////////
 	
-	public Node search(long ID) {
+	public Node search(long ID) { //calls binarysearch method to search for the given ID in the tree
 		 return binarySearch(root, ID);
 	}
 
-	private Node binarySearch(Node node, long key) {
+	private Node binarySearch(Node node, long key) { //returns the node if found in the tree using binarysearch algorithm
 		if (node == null) return null;
 		if (key == node.note.getID()) {
 			return node;
@@ -230,7 +226,7 @@ public class AVLTree implements NoteCollection{
 		}
 	}
 	
-    public Node inOrderTraverse(Node rootNode, Counter counter){
+    public Node inOrderTraverse(Node rootNode, Counter counter){ //traverses the tree inOrder (LPR)
     	if  (rootNode != null && ! counter.expired()) {
 		Node left = inOrderTraverse(rootNode.left, counter);
 			if (left != null) {
@@ -386,13 +382,6 @@ public class AVLTree implements NoteCollection{
    }
 
    public static void main(String[] args) {
-	   AVLTree avl = new AVLTree();
-	   Note happy = new Note();
-	   Note sad = new Note();
-//      avl.add(happy);
-//      avl.traverseInOrder();
-//      avl.add(sad);
-//      avl.traverseInOrder();
-//      System.out.println(avl.getSize());
+	
     }
 }
