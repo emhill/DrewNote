@@ -1,39 +1,38 @@
 package edu.drew.note.test;
 
-import static org.junit.Assert.*;
-import junit.framework.TestCase;
-import java.util.Random;
-import org.junit.Test;
 
-import edu.drew.note.ArrayListCollection;
-import edu.drew.note.DictionaryUnsortedList;
+import static org.junit.Assert.*;
+import java.util.Random;
+import junit.framework.TestCase;
+import org.junit.Test;
+import edu.drew.note.SortedLinkedList;
 import edu.drew.note.Note;
 
-public class DictionaryUnsortedListTest extends TestCase {
+public class SortedLinkedListTest extends TestCase {
 	private static final int SIZE = 100;
 	private Note[] array = new Note[SIZE];
-	private Note[]shuffled=new Note[SIZE];
-	private DictionaryUnsortedList notes = new DictionaryUnsortedList();
+	private Note[] shuffled = new Note[SIZE];
+	private SortedLinkedList notes = new SortedLinkedList();
 	
 	@Override
 	protected void setUp() {
 		array = new Note[SIZE];
-		for (int i = 0; i < SIZE; i++){
+		for (int i = 0; i < SIZE; i++) {
 			array[i] = new Note();
-			shuffled[i]=array[i];
+			shuffled[i] = array[i];
 		}
 		shuffleArray(shuffled);
 	}
 
 	private Note addOneElement() {
-		notes = new DictionaryUnsortedList();
+		notes = new SortedLinkedList();
 		Note n = new Note();
 		notes.add(n);
 		return n;
 	}
 	
 	private int addManyElements() {
-		notes = new DictionaryUnsortedList();
+		notes = new SortedLinkedList();
 		for (int i = 0; i < SIZE; i++)
 			notes.add(array[i]);
 		return SIZE;
@@ -49,20 +48,20 @@ public class DictionaryUnsortedListTest extends TestCase {
 	
 	@Test
 	public void testIsEmpty() {
-		notes = new DictionaryUnsortedList();
+		notes = new SortedLinkedList();
 		assertTrue(notes.isEmpty());
 	}
 	
 	@Test
 	public void testIsNotEmpty() {
-		notes = new DictionaryUnsortedList();
+		notes = new SortedLinkedList();
 		notes.add(new Note());
 		assertFalse(notes.isEmpty());
 	}
 	
 	@Test
 	public void testSizeOne() {
-		notes = new DictionaryUnsortedList();
+		notes = new SortedLinkedList();
 		notes.add(new Note());
 		assertEquals(1, notes.getSize());
 	}
@@ -92,7 +91,7 @@ public class DictionaryUnsortedListTest extends TestCase {
 	
 	@Test
 	public void testAddManyShuffled() {
-		notes = new DictionaryUnsortedList();
+		notes = new SortedLinkedList();
 		for (int i = 0; i < SIZE; i++)
 			notes.add(shuffled[i]);
 		assertEquals(SIZE, notes.getSize());
@@ -134,7 +133,7 @@ public class DictionaryUnsortedListTest extends TestCase {
 	
 	@Test
 	public void testRemoveEmpty() {
-		notes = new DictionaryUnsortedList();
+		notes = new SortedLinkedList();
 		Note n = new Note();
 		// below should throw no exceptions!
 		notes.remove(n.getID()); 
@@ -162,7 +161,7 @@ public class DictionaryUnsortedListTest extends TestCase {
 	
 	@Test
 	public void testRemoveManyShuffledNotesByID() {
-		notes = new DictionaryUnsortedList();
+		notes = new SortedLinkedList();
 		for (int i = 0; i < SIZE; i++)
 			notes.add(shuffled[i]);
 		assertEquals(SIZE, notes.getSize());
@@ -174,7 +173,7 @@ public class DictionaryUnsortedListTest extends TestCase {
 	
 	@Test
 	public void testToArrayEmpty() {
-		notes = new DictionaryUnsortedList();
+		notes = new SortedLinkedList();
 		Note[] a = notes.toArray();
 		assertEquals(0, a.length);
 	}
@@ -194,9 +193,9 @@ public class DictionaryUnsortedListTest extends TestCase {
 		assertEquals(size, a.length);
 		// since the input order is the sorted order, 
 		// should be able to check all
-//		for (int i = 0; i < size; i++) {
-//			assertEquals(array[i], a[i]);
-//		}
+		/*for (int i = 0; i < size; i++) {
+			assertEquals(array[i], a[i]);
+		}*/
 	}
 	
 	private void shuffleArray(Note[] ar)
@@ -229,7 +228,7 @@ public class DictionaryUnsortedListTest extends TestCase {
 			shuffleArray(shuffle);
 			start = System.nanoTime();
 			// begin test
-			notes = new DictionaryUnsortedList();
+			notes = new SortedLinkedList();
 			for (int i = 0; i < shuffle.length; i++)
 				notes.add(shuffle[i]);
 			for (int i = 0; i < shuffle.length; i++)
@@ -244,5 +243,5 @@ public class DictionaryUnsortedListTest extends TestCase {
 							"Average Time for " + runs + " runs: " +
 							average / runs + " ms");
 	}
-
+	
 }

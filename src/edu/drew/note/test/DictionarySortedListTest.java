@@ -85,21 +85,27 @@ public class DictionarySortedListTest extends TestCase {
 		assertEquals(size, notes.getSize());
 		for (int i = 0; i < size; i++) {
 			assertTrue(notes.contains(array[i].getID()));
-			assertTrue(notes.contains(array[i]));
+			assertTrue(notes.contains(array[i]));	
 		}
 	}
 	
 	@Test
 	public void testAddManyShuffled() {
 		notes = new DictionarySortedList();
-		for (int i = 0; i < SIZE; i++)
-			notes.add(shuffled[i]);
+		for (int i = 0; i < SIZE; i++) {
+			System.out.println("ID: "+shuffled[i].getID());
+			System.out.println("Added?: "+notes.add(shuffled[i]));
+		}
+		System.out.println("SIZE: "+SIZE);
+		System.out.println("getSize(): "+ notes.getSize());
 		assertEquals(SIZE, notes.getSize());
 		for (int i = 0; i < SIZE; i++) {
-			assertTrue(notes.contains(array[i]));
-			assertTrue(notes.contains(array[i].getID()));
+			//assertTrue(notes.contains(array[i]));
+			//assertTrue(notes.contains(array[i].getID()));
+			
+			System.out.println("Contains Obj: "+notes.contains(array[i]));
+			System.out.println("Contains ID: "+ notes.contains(array[i].getID()));
 		}
-		System.out.println("HERE: "+notes.toString());
 	}
 	
 	@Test
